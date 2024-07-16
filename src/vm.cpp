@@ -49,17 +49,16 @@ const std::string& VM::GetBcFilename() {
     return bc_filename;
 }
 
-void VM::Disassemble(int32_t opcode) {
+void VM::Disassemble(const int32_t opcode) {
 
     if (ip >= code.size()) return;
 
-    Instruction instr = Instructions::opcodes[opcode];
+    const Instruction instr = Instructions::opcodes[opcode];
     printf("%04d: %-16s", ip, instr.getMnemonic());
 
     bool noops = false;
     //print operands
-    int operandCount = instr.getOperand();
-    switch (operandCount) {
+    switch (instr.getOperand()) {
         case 1:
             printf(" %d", code[ip + 1]);
             break;
@@ -102,7 +101,6 @@ int_fast32_t global_mem[DATA_MAX_SIZE];
 void VM::Cpu() {
 
     ExceptionHandler _exception_handler;
-    bool arithmetic_overflow;
 
     if (ip > code.size()) {
         _exception_handler.Handler(ExceptionHandler::EXCEPTION_IP_OVERFLOW, 0);
@@ -185,19 +183,19 @@ void VM::Cpu() {
         case IADD:
             b = stack[sp--];
             a = stack[sp--];
-            arithmetic_overflow = _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
+            _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
             stack[++sp] = a + b;
             break;
         case ISUB:
             b = stack[sp--];
             a = stack[sp--];
-            arithmetic_overflow = _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
+            _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
             stack[++sp] = a - b;
             break;
         case IMUL:
             b = stack[sp--];
             a = stack[sp--];
-            arithmetic_overflow = _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
+            _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
             stack[++sp] = a * b;
             break;
         case IDIV:
