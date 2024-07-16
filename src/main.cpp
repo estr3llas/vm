@@ -18,7 +18,7 @@ int main (int argc, char** argv) {
 
     VM vm (Examples::test, Examples::TEST_ENTRYPOINT, 0);
     vm.SetTrace(VM_TRUE);
-    VMReturn ret = vm.VMExec();
+    const VMReturn ret = vm.VMExec();
 
     printf("\n[!] VMReturn: %d", ret);
 
