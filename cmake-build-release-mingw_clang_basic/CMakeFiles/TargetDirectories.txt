@@ -1,0 +1,3 @@
+C:/Users/User/CLionProjects/simple_vm/cmake-build-release-mingw_clang_basic/CMakeFiles/simple_vm.dir
+C:/Users/User/CLionProjects/simple_vm/cmake-build-release-mingw_clang_basic/CMakeFiles/edit_cache.dir
+C:/Users/User/CLionProjects/simple_vm/cmake-build-release-mingw_clang_basic/CMakeFiles/rebuild_cache.dir
