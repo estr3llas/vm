@@ -44,7 +44,7 @@ public:
         operand(VM_ZERO)
     {};
 
-    Instruction(const char* _mnemonic) :
+    explicit Instruction(const char* _mnemonic) :
         mnemonic(_mnemonic),
         operand(VM_ZERO)
     {};
@@ -64,8 +64,8 @@ public:
 
 };
 
-namespace {
-    Instruction opcodes[] = {
+namespace Instructions {
+        inline Instruction opcodes[] = {
         Instruction(""),
         Instruction("IADD"),
         Instruction("ISUB"),

@@ -52,7 +52,7 @@ void VM::Disassemble(int32_t opcode) {
 
     if (ip >= code.size()) return;
 
-    Instruction instr = opcodes[opcode];
+    Instruction instr = Instructions::opcodes[opcode];
     printf("%04d: %-16s", ip, instr.getMnemonic());
 
     bool noops = false;
