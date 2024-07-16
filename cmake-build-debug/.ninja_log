@@ -6,3 +6,11 @@
 5	387	7428495616442793	CMakeFiles/simple_vm.dir/src/main.cpp.obj	13e2af63e6b1d3d4
 4	441	7428495833624473	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	3789eb7a77f0827b
 441	531	7428495837994255	simple_vm.exe	c73eab92d3a72bf0
+8	349	7428497617383860	CMakeFiles/simple_vm.dir/src/exception.cpp.obj	c72449b858857117
+5	382	7428497617353847	CMakeFiles/simple_vm.dir/src/main.cpp.obj	13e2af63e6b1d3d4
+11	449	7428497617413866	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	3789eb7a77f0827b
+449	531	7428497621796571	simple_vm.exe	c73eab92d3a72bf0
+8	345	7428497920784377	CMakeFiles/simple_vm.dir/src/exception.cpp.obj	c72449b858857117
+5	371	7428497920744376	CMakeFiles/simple_vm.dir/src/main.cpp.obj	13e2af63e6b1d3d4
+11	444	7428497920804389	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	3789eb7a77f0827b
+444	524	7428497925136862	simple_vm.exe	c73eab92d3a72bf0

@@ -12,8 +12,8 @@
 
 #define VM_TRUE true
 #define VM_FALSE false
-#define VM_ZERO 0
-#define VM_SP_START -1
+#define VM_ZERO (0)
+#define VM_SP_START (-1)
 
 class Context {
 private:
@@ -25,6 +25,7 @@ public:
     std::vector<int32_t> locals;
 
     Context() :
+    prev(nullptr),
     return_ip(0)
     {}
     ;
@@ -41,7 +42,7 @@ public:
     }
 
     int32_t getReturnIp() {
-        return return_ip;
+        return static_cast<int32_t>(return_ip);
     }
 
     Context* getPrev() {
