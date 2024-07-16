@@ -80,9 +80,9 @@ public:
     VMReturn VMExec();
     void Cpu();
     void Disassemble(int32_t opcode);
-    void VMPrint(int32_t arg);
+    static void VMPrint(int32_t arg);
 
-    uint32_t get_ip();
+    uint32_t get_ip() const;
 
     void SetTrace(bool value);
     void SetBcFilename(const std::string &filename);

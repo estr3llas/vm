@@ -54,11 +54,11 @@ public:
         operand(_operand)
     {};
 
-    const char* getMnemonic(){
+    [[nodiscard]] const char* getMnemonic() const{
         return mnemonic;
     }
 
-    int getOperand(){
+    [[nodiscard]] int getOperand() const{
         return operand;
     }
 

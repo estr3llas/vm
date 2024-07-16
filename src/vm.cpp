@@ -13,7 +13,7 @@ VM::VM() :
     ctx(Context(nullptr, 0, LOCALS_MAX_SIZE))
     {};
 
-VM::VM(const std::vector<int>& bytecode, int32_t entrypoint, size_t datasize) :
+VM::VM(const std::vector<int>& bytecode, const int32_t entrypoint, const size_t datasize) :
     code(bytecode),
     ip(entrypoint),
     data(
@@ -23,18 +23,19 @@ VM::VM(const std::vector<int>& bytecode, int32_t entrypoint, size_t datasize) :
             : DATA_MAX_SIZE
         ),
     stack(STACK_MAX_SIZE),
+    fp(VM_ZERO),
     ctx(Context(nullptr, 0, LOCALS_MAX_SIZE))
     {};
 
-void VM::SetTrace(bool value) {
+void VM::SetTrace(const bool value) {
     trace = value;
 }
 
-void VM::VMPrint(int32_t arg){
+void VM::VMPrint(const int32_t arg){
     printf("%d\n", arg);
 }
 
-uint32_t VM::get_ip() {
+uint32_t VM::get_ip() const {
     return ip;
 }
 
