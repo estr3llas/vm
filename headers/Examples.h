@@ -10,9 +10,9 @@
 
 namespace Examples {
 
-    const int FACTORIAL_ADDRESS = 0;
-    const int FACTORIAL_ENTRYPOINT = 23;
-    std::vector<int32_t> factorial = {
+    constexpr int FACTORIAL_ADDRESS = 0;
+    constexpr int FACTORIAL_ENTRYPOINT = 23;
+    inline std::vector<int32_t> factorial = {
 //.def factorial: ARGS=1, LOCALS=0	ADDRESS
 //	IF N < 2 RETURN 1
         LOAD, 0,                // 0
@@ -67,8 +67,8 @@ namespace Examples {
         HALT                        // 17
     };
 
-    const int EXCEPTION_ENTRYPOINT = 0;
-    std::vector<int> exception = {
+    constexpr int EXCEPTION_ENTRYPOINT = 0;
+    inline std::vector<int> exception = {
     // TRIGGER EXCEPTION
     // STORE 1 ON GLOBAL MEMORY
         ICONST, 1,                  // 0
@@ -86,9 +86,9 @@ namespace Examples {
         HALT                        // 13
     };
 
-    const int TEST_FUNC_ADDR = 12;
-    const int TEST_ENTRYPOINT = 0;
-    std::vector<int32_t> test = {
+    constexpr int TEST_FUNC_ADDR = 12;
+    constexpr int TEST_ENTRYPOINT = 0;
+    inline std::vector<int32_t> test = {
         ICONST, 1,
         CALL, TEST_FUNC_ADDR, 1, 0,
         ICONST, 2,
