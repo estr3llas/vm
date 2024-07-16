@@ -1,0 +1,11 @@
+# ninja log v6
+5	362	7428498808206029	CMakeFiles/simple_vm.dir/src/exception.cpp.obj	4bf2353c9021c34c
+2	394	7428498808176024	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
+7	481	7428498808226031	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
+482	581	7428498812968730	simple_vm.exe	9c3172eade3c3f11
+7	352	7428502338575959	CMakeFiles/simple_vm.dir/src/exception.cpp.obj	4bf2353c9021c34c
+4	387	7428502338545953	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
+9	472	7428502338595956	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
+472	547	7428502343221060	simple_vm.exe	9c3172eade3c3f11
+4	464	7428503024759389	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
+465	540	7428503029368811	simple_vm.exe	9c3172eade3c3f11
