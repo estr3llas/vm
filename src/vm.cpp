@@ -105,17 +105,17 @@ void VM::Cpu() {
     bool arithmetic_overflow;
 
     if (ip > code.size()) {
-        _exception_handler.Handler(_exception_handler.EXCEPTION_IP_OVERFLOW, 0);
+        _exception_handler.Handler(ExceptionHandler::EXCEPTION_IP_OVERFLOW, 0);
     }
 
-    int32_t operand, opcode, a, b, addr, offset;
+    int32_t operand, a, b, addr, offset;
     int32_t first_arg;
     int32_t nargs, locals;
 
     std::vector<Context> call_stack;
 
     while(ip < code.size()) {
-        opcode = code[ip];
+        const int32_t opcode = code[ip];
         if(trace) {
             Disassemble(opcode);
         }
@@ -204,7 +204,7 @@ void VM::Cpu() {
             b = stack[sp--];
             a = stack[sp--];
             if(b == 0) {
-                _exception_handler.Handler(_exception_handler.EXCEPTION_DIVIDE_BY_ZERO, opcode);
+                _exception_handler.Handler(ExceptionHandler::EXCEPTION_DIVIDE_BY_ZERO, opcode);
             }
             stack[++sp] = a / b;
             break;
@@ -234,7 +234,7 @@ void VM::Cpu() {
         case HALT:
             return;
         default:
-            _exception_handler.Handler(_exception_handler.EXCEPTION_UNKNOWN_OPCODE, opcode);
+            _exception_handler.Handler(ExceptionHandler::EXCEPTION_UNKNOWN_OPCODE, opcode);
             return;
         }
     }
