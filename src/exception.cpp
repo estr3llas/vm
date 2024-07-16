@@ -6,7 +6,7 @@
 #include "../headers/exception_handler.h"
 
 void ExceptionHandler::EH_exit(){
-    exit(1);
+    exit(VM_TRUE);
 }
 
 void ExceptionHandler::EH_abort(){

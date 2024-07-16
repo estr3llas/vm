@@ -41,11 +41,11 @@ public:
         return locals;
     }
 
-    int32_t getReturnIp() {
+    [[nodiscard]] int32_t getReturnIp() const {
         return static_cast<int32_t>(return_ip);
     }
 
-    Context* getPrev() {
+    [[nodiscard]] Context* getPrev() const {
         return prev;
     }
 };
@@ -82,7 +82,7 @@ public:
     void Disassemble(int32_t opcode);
     static void VMPrint(int32_t arg);
 
-    uint32_t get_ip() const;
+    [[nodiscard]] uint32_t get_ip() const;
 
     void SetTrace(bool value);
     void SetBcFilename(const std::string &filename);

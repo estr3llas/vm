@@ -21,8 +21,8 @@ public:
 
     void Handler(uint32_t exception_code, int32_t opcode);
 
-    void EH_exit();
-    void EH_abort();
+    static void EH_exit();
+    static void EH_abort();
 };
 
 #endif
