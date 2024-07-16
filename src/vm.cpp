@@ -108,7 +108,7 @@ void VM::Cpu() {
 
     int32_t operand, a, b, addr, offset;
     int32_t first_arg;
-    int32_t nargs, locals;
+    int32_t nargs;
 
     std::vector<Context> call_stack;
 
@@ -139,9 +139,8 @@ void VM::Cpu() {
         case CALL:
             addr = code[ip++];
             nargs = code[ip++];
-            locals = code[ip++];
             call_stack.push_back(ctx);
-            ctx = Context(&call_stack.back(), ip, LOCALS_MAX_SIZE);
+            ctx = Context(&call_stack.back(), (++ip), LOCALS_MAX_SIZE);
             first_arg = sp - (nargs + 1);
             for (int i = 0; i < nargs; i++) {
                 ctx.getLocals()[i] = stack[first_arg + i];
