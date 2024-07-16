@@ -1,4 +1,4 @@
-# simple_vm
+# vm
 
 A simple bytecode Virtual Machine.
 
