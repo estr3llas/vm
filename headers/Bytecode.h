@@ -30,7 +30,8 @@ enum Bytecode {
     NEG = 20,
     INC = 21,
     DEC = 22,
-    NOP = 23
+    NOP = 23,
+    INTERMODULAR_CALL = 24
 };
 
 class Instruction {
@@ -66,30 +67,33 @@ public:
 
 namespace Instructions {
         inline Instruction opcodes[] = {
-        Instruction(""),
-        Instruction("IADD"),
-        Instruction("ISUB"),
-        Instruction("IMUL"),
-        Instruction("IDIV"),
-        Instruction("ILT"),
-        Instruction("IEQ"),
-        Instruction("BR", 1),
-        Instruction("BRT", 1),
-        Instruction("BRF", 1),
-        Instruction("ICONST", 1),
-        Instruction("LOAD", 1),
-        Instruction("GLOAD", 1),
-        Instruction("STORE", 1),
-        Instruction("GSTORE", 1),
-        Instruction("PRINT"),
-        Instruction("POP"),
-        Instruction("HALT"),
-        Instruction("CALL", 3),
-        Instruction("RET"),
-        Instruction("NEG"),
-        Instruction("INC"),
-        Instruction("DEC"),
-        Instruction("NOP")
+            Instruction(""),
+            Instruction("IADD"),
+            Instruction("ISUB"),
+            Instruction("IMUL"),
+            Instruction("IDIV"),
+            Instruction("ILT"),
+            Instruction("IEQ"),
+            Instruction("BR", 1),
+            Instruction("BRT", 1),
+            Instruction("BRF", 1),
+            Instruction("ICONST", 1),
+            Instruction("LOAD", 1),
+            Instruction("GLOAD", 1),
+            Instruction("STORE", 1),
+            Instruction("GSTORE", 1),
+            Instruction("PRINT"),
+            Instruction("POP"),
+            Instruction("HALT"),
+            Instruction("CALL", 3),
+            Instruction("RET"),
+            Instruction("NEG"),
+            Instruction("INC"),
+            Instruction("DEC"),
+            Instruction("NOP"),
+
+            //argument = index of function within a table
+            Instruction("INTERMODULAR_CALL", 1)
     };
 }
 

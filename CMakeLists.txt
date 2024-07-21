@@ -10,4 +10,6 @@ add_executable(simple_vm src/main.cpp
         headers/exception_handler.h
         headers/vm.h
         src/exception.cpp
-        src/vm.cpp)
+        src/vm.cpp
+        src/parser.cpp
+        headers/peb.h)

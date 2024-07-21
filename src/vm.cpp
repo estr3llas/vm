@@ -115,7 +115,7 @@ void VM::Cpu() {
     while(ip < code.size()) {
         const int32_t opcode = code[ip];
         if(trace) {
-            Disassemble(opcode);
+            VM::Disassemble(opcode);
         }
         ip++;
         switch (opcode) {
