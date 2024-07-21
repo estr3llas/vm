@@ -108,7 +108,7 @@ typedef struct PEB {
  ULONG SessionId;
 } PEB, *PPEB;
 
-struct LDR_DATA_TABLE_ENTRY
+typedef struct LDR_DATA_TABLE_ENTRY
 {
     struct _LIST_ENTRY InLoadOrderLinks;                                    //0x0
     struct _LIST_ENTRY InMemoryOrderLinks;                                  //0x10
@@ -116,8 +116,8 @@ struct LDR_DATA_TABLE_ENTRY
     VOID* DllBase;                                                          //0x30
     VOID* EntryPoint;                                                       //0x38
     ULONG SizeOfImage;                                                      //0x40
-    UNICODE_STRING FullDllName;                                     //0x48
-    UNICODE_STRING BaseDllName;                                     //0x58
+    UNICODE_STRING FullDllName;                                             //0x48
+    UNICODE_STRING BaseDllName;                                             //0x58
     union
     {
         UCHAR FlagGroup[4];                                                 //0x68
@@ -172,6 +172,6 @@ struct LDR_DATA_TABLE_ENTRY
     ULONG ReferenceCount;                                                   //0x114
     ULONG DependentLoadFlags;                                               //0x118
     UCHAR SigningLevel;                                                     //0x11c
-};
+} _LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
 
 #endif //PEB_H
