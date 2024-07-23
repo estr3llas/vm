@@ -119,24 +119,24 @@ void VM::Cpu() {
         }
         ip++;
         switch (opcode) {
-        case NOP:
+        case VM_NOP:
             // just for padding
             break;
-        case GLOAD:
+        case VM_GLOAD:
             addr = code[ip];
             ip++;
             operand = global_mem[addr];
             sp++;
             stack[sp] = operand;
             break;
-        case GSTORE:
+        case VM_GSTORE:
             operand = stack[sp];
             sp--;
             addr = code[ip];
             ip++;
             global_mem[addr] = operand;
             break;
-        case CALL:
+        case VM_CALL:
             addr = code[ip++];
             nargs = code[ip++];
             call_stack.push_back(ctx);
@@ -148,56 +148,56 @@ void VM::Cpu() {
             sp -= nargs;
             ip = addr;
             break;
-        case RET:
+        case VM_RET:
             //ctx = call_stack.back();
             call_stack.pop_back();
             ip = ctx.getReturnIp();
             break;
-        case LOAD:
+        case VM_LOAD:
             offset = code[ip++];
             ctx = Context(&ctx, ip, LOCALS_MAX_SIZE);
             stack[++sp] = ctx.getLocals()[offset];
             break;
-        case IEQ:
+        case VM_EQ:
             b = stack[sp--];
             a = stack[sp--];
             stack[++sp] = (a == b) ? VM_TRUE : VM_FALSE;
             break;
-        case ILT:
+        case VM_LT:
             b = stack[sp--];
             a = stack[sp--];
             stack[++sp] = (a < b) ? VM_TRUE : VM_FALSE;
             break;
-        case BR:
+        case VM_BR:
             ip = code[ip++];
             break;
-        case BRT:
+        case VM_BRT:
             addr = code[ip++];
             if (stack[sp--] == VM_TRUE) ip = addr;
             break;
-        case BRF:
+        case VM_BRF:
             addr = code[ip++];
             if (stack[sp--] == VM_FALSE) ip = addr;
             break;
-        case IADD:
+        case VM_ADD:
             b = stack[sp--];
             a = stack[sp--];
             _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
             stack[++sp] = a + b;
             break;
-        case ISUB:
+        case VM_SUB:
             b = stack[sp--];
             a = stack[sp--];
             _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
             stack[++sp] = a - b;
             break;
-        case IMUL:
+        case VM_MUL:
             b = stack[sp--];
             a = stack[sp--];
             _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
             stack[++sp] = a * b;
             break;
-        case IDIV:
+        case VM_DIV:
             b = stack[sp--];
             a = stack[sp--];
             if(b == 0) {
@@ -205,30 +205,30 @@ void VM::Cpu() {
             }
             stack[++sp] = a / b;
             break;
-        case NEG:
+        case VM_NEG:
             a = stack[sp--];
             stack[++sp] = (-a);
             break;
-        case INC:
+        case VM_INC:
             a = stack[sp--];
             a = a + 1;
             stack[++sp] = a;
             break;
-        case DEC:
+        case VM_DEC:
             a = stack[sp--];
             a = a - 1;
             stack[++sp] = a;
             break;
-        case ICONST:
+        case VM_CONST:
             stack[++sp] = code[ip++];
             break;
-        case POP:
+        case VM_POP:
             --sp;
             break;
-        case PRINT:
+        case VM_PRINT:
             VMPrint(stack[sp--]);
             break;
-        case HALT:
+        case VM_HALT:
             return;
         default:
             _exception_handler.Handler(ExceptionHandler::EXCEPTION_UNKNOWN_OPCODE, opcode);

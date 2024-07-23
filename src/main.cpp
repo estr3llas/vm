@@ -2,6 +2,8 @@
 #include "../headers/common.h"
 #include "../headers/vm.h"
 #include "../headers/Examples.h"
+#include "../headers/parser.h"
+#include "../headers/peb.h"
 
 //#include "../lib/include/boost/program_options.hpp"
 
@@ -21,6 +23,7 @@ int main (int argc, char** argv) {
     const VMReturn ret = vm.VMExec();
 
     printf("\n[!] VMReturn: %d", ret);
+
 
     return 0;
 }

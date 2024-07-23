@@ -12,4 +12,5 @@ add_executable(simple_vm src/main.cpp
         src/exception.cpp
         src/vm.cpp
         src/parser.cpp
-        headers/peb.h)
+        headers/peb.h
+        headers/parser.h)
