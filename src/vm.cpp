@@ -35,10 +35,16 @@ void VM::SetTrace(const bool value) {
 template<typename T>
 void VM::VMPrint(T arg){
 
-    if(typeid(arg) == typeid(void*)) {
+    if(typeid(arg) == typeid(PVOID)) {
         printf("%p\n", arg);
         return;
     }
+
+    if(typeid(arg) == typeid(int64_t)) {
+        printf("%llx\n", arg);
+        return;
+    }
+
     printf("%d\n", arg);
 }
 
@@ -88,7 +94,7 @@ void VM::Disassemble(const int32_t opcode) {
     } else {
         printf("[");
         for (int i = 0; i <= sp; ++i) {
-        printf("%d", stack[i]);
+        printf("%ld", stack[i]);
         if (i < sp) {
             printf(", ");
         }
@@ -104,6 +110,7 @@ VMReturn VM::VMExec() {
 }
 
 int_fast32_t global_mem[DATA_MAX_SIZE];
+int_fast64_t global_mem_64[DATA_MAX_SIZE];
 
 void VM::Cpu() {
 
@@ -113,7 +120,8 @@ void VM::Cpu() {
         _exception_handler.Handler(ExceptionHandler::EXCEPTION_IP_OVERFLOW, 0);
     }
 
-    int32_t operand, a, b, addr, offset;
+    int32_t operand, addr, offset;
+    int64_t a, b, operand_64;
     int32_t first_arg;
     int32_t nargs;
 
@@ -137,11 +145,11 @@ void VM::Cpu() {
                 stack[sp] = operand;
                 break;
             case VM_GSTORE:
-                operand = stack[sp];
+                operand_64 = stack[sp];
                 sp--;
                 addr = code[ip];
                 ip++;
-                global_mem[addr] = operand;
+                global_mem_64[addr] = operand_64;
                 break;
             case VM_CALL:
                 addr = code[ip++];
@@ -235,8 +243,10 @@ void VM::Cpu() {
             case VM_PRINT:
                 VMPrint(stack[sp--]);
                 break;
+            // pushes the module base to stack
             case MODULE_BASE:
-                stack[++sp] = getModuleBase();
+                stack[++sp] = reinterpret_cast<int64_t>(getModuleBase());
+                break;
             case VM_HALT:
                 return;
             default:

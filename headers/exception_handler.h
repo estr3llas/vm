@@ -17,7 +17,7 @@ public:
         EXCEPTION_IP_OVERFLOW = 4,
     };
 
-    void CheckForArithmeticOverflow(int32_t operand1, int32_t operand2, int32_t opcode);
+    void CheckForArithmeticOverflow(int64_t operand1, int64_t operand2, int32_t opcode);
 
     void Handler(uint32_t exception_code, int32_t opcode);
 

@@ -22,7 +22,7 @@ private:
     uint32_t return_ip;
 public:
 
-    std::vector<int32_t> locals;
+    std::vector<int64_t> locals;
 
     Context() :
     prev(nullptr),
@@ -37,7 +37,7 @@ public:
     {}
     ;
 
-    std::vector<int32_t>& getLocals() {
+    std::vector<int64_t>& getLocals() {
         return locals;
     }
 
@@ -60,7 +60,7 @@ class VM {
 private:
     std::vector<int32_t> data;
     std::vector<int32_t> code;
-    std::vector<int32_t> stack;
+    std::vector<int64_t> stack;
 
     Context ctx;
 
@@ -75,7 +75,7 @@ private:
 public:
 
     VM();
-    VM(const std::vector<int>& bytecode, int32_t entrypoint, size_t datasize);
+    VM(const std::vector<int32_t>& bytecode, int32_t entrypoint, size_t datasize);
 
     VMReturn VMExec();
     void Cpu();
