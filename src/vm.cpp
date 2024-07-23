@@ -5,6 +5,7 @@
 #include "../headers/vm.h"
 #include "../headers/Bytecode.h"
 #include "../headers/exception_handler.h"
+#include "../headers/parser.h"
 
 VM::VM() :
     ip(VM_ZERO),
@@ -31,7 +32,13 @@ void VM::SetTrace(const bool value) {
     trace = value;
 }
 
-void VM::VMPrint(const int32_t arg){
+template<typename T>
+void VM::VMPrint(T arg){
+
+    if(typeid(arg) == typeid(void*)) {
+        printf("%p\n", arg);
+        return;
+    }
     printf("%d\n", arg);
 }
 
@@ -119,120 +126,122 @@ void VM::Cpu() {
         }
         ip++;
         switch (opcode) {
-        case VM_NOP:
-            // just for padding
-            break;
-        case VM_GLOAD:
-            addr = code[ip];
-            ip++;
-            operand = global_mem[addr];
-            sp++;
-            stack[sp] = operand;
-            break;
-        case VM_GSTORE:
-            operand = stack[sp];
-            sp--;
-            addr = code[ip];
-            ip++;
-            global_mem[addr] = operand;
-            break;
-        case VM_CALL:
-            addr = code[ip++];
-            nargs = code[ip++];
-            call_stack.push_back(ctx);
-            ctx = Context(&call_stack.back(), (++ip), LOCALS_MAX_SIZE);
-            first_arg = sp - (nargs + 1);
-            for (int i = 0; i < nargs; i++) {
-                ctx.getLocals()[i] = stack[first_arg + i];
-            }
-            sp -= nargs;
-            ip = addr;
-            break;
-        case VM_RET:
-            //ctx = call_stack.back();
-            call_stack.pop_back();
-            ip = ctx.getReturnIp();
-            break;
-        case VM_LOAD:
-            offset = code[ip++];
-            ctx = Context(&ctx, ip, LOCALS_MAX_SIZE);
-            stack[++sp] = ctx.getLocals()[offset];
-            break;
-        case VM_EQ:
-            b = stack[sp--];
-            a = stack[sp--];
-            stack[++sp] = (a == b) ? VM_TRUE : VM_FALSE;
-            break;
-        case VM_LT:
-            b = stack[sp--];
-            a = stack[sp--];
-            stack[++sp] = (a < b) ? VM_TRUE : VM_FALSE;
-            break;
-        case VM_BR:
-            ip = code[ip++];
-            break;
-        case VM_BRT:
-            addr = code[ip++];
-            if (stack[sp--] == VM_TRUE) ip = addr;
-            break;
-        case VM_BRF:
-            addr = code[ip++];
-            if (stack[sp--] == VM_FALSE) ip = addr;
-            break;
-        case VM_ADD:
-            b = stack[sp--];
-            a = stack[sp--];
-            _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
-            stack[++sp] = a + b;
-            break;
-        case VM_SUB:
-            b = stack[sp--];
-            a = stack[sp--];
-            _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
-            stack[++sp] = a - b;
-            break;
-        case VM_MUL:
-            b = stack[sp--];
-            a = stack[sp--];
-            _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
-            stack[++sp] = a * b;
-            break;
-        case VM_DIV:
-            b = stack[sp--];
-            a = stack[sp--];
-            if(b == 0) {
-                _exception_handler.Handler(ExceptionHandler::EXCEPTION_DIVIDE_BY_ZERO, opcode);
-            }
-            stack[++sp] = a / b;
-            break;
-        case VM_NEG:
-            a = stack[sp--];
-            stack[++sp] = (-a);
-            break;
-        case VM_INC:
-            a = stack[sp--];
-            a = a + 1;
-            stack[++sp] = a;
-            break;
-        case VM_DEC:
-            a = stack[sp--];
-            a = a - 1;
-            stack[++sp] = a;
-            break;
-        case VM_CONST:
-            stack[++sp] = code[ip++];
-            break;
-        case VM_POP:
-            --sp;
-            break;
-        case VM_PRINT:
-            VMPrint(stack[sp--]);
-            break;
-        case VM_HALT:
-            return;
-        default:
-            _exception_handler.Handler(ExceptionHandler::EXCEPTION_UNKNOWN_OPCODE, opcode);
-            return;
+            case VM_NOP:
+                // just for padding
+                break;
+            case VM_GLOAD:
+                addr = code[ip];
+                ip++;
+                operand = global_mem[addr];
+                sp++;
+                stack[sp] = operand;
+                break;
+            case VM_GSTORE:
+                operand = stack[sp];
+                sp--;
+                addr = code[ip];
+                ip++;
+                global_mem[addr] = operand;
+                break;
+            case VM_CALL:
+                addr = code[ip++];
+                nargs = code[ip++];
+                call_stack.push_back(ctx);
+                ctx = Context(&call_stack.back(), (++ip), LOCALS_MAX_SIZE);
+                first_arg = sp - (nargs + 1);
+                for (int i = 0; i < nargs; i++) {
+                    ctx.getLocals()[i] = stack[first_arg + i];
+                }
+                sp -= nargs;
+                ip = addr;
+                break;
+            case VM_RET:
+                //ctx = call_stack.back();
+                call_stack.pop_back();
+                ip = ctx.getReturnIp();
+                break;
+            case VM_LOAD:
+                offset = code[ip++];
+                ctx = Context(&ctx, ip, LOCALS_MAX_SIZE);
+                stack[++sp] = ctx.getLocals()[offset];
+                break;
+            case VM_EQ:
+                b = stack[sp--];
+                a = stack[sp--];
+                stack[++sp] = (a == b) ? VM_TRUE : VM_FALSE;
+                break;
+            case VM_LT:
+                b = stack[sp--];
+                a = stack[sp--];
+                stack[++sp] = (a < b) ? VM_TRUE : VM_FALSE;
+                break;
+            case VM_BR:
+                ip = code[ip++];
+                break;
+            case VM_BRT:
+                addr = code[ip++];
+                if (stack[sp--] == VM_TRUE) ip = addr;
+                break;
+            case VM_BRF:
+                addr = code[ip++];
+                if (stack[sp--] == VM_FALSE) ip = addr;
+                break;
+            case VM_ADD:
+                b = stack[sp--];
+                a = stack[sp--];
+                _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
+                stack[++sp] = a + b;
+                break;
+            case VM_SUB:
+                b = stack[sp--];
+                a = stack[sp--];
+                _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
+                stack[++sp] = a - b;
+                break;
+            case VM_MUL:
+                b = stack[sp--];
+                a = stack[sp--];
+                _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
+                stack[++sp] = a * b;
+                break;
+            case VM_DIV:
+                b = stack[sp--];
+                a = stack[sp--];
+                if(b == 0) {
+                    _exception_handler.Handler(ExceptionHandler::EXCEPTION_DIVIDE_BY_ZERO, opcode);
+                }
+                stack[++sp] = a / b;
+                break;
+            case VM_NEG:
+                a = stack[sp--];
+                stack[++sp] = (-a);
+                break;
+            case VM_INC:
+                a = stack[sp--];
+                a = a + 1;
+                stack[++sp] = a;
+                break;
+            case VM_DEC:
+                a = stack[sp--];
+                a = a - 1;
+                stack[++sp] = a;
+                break;
+            case VM_CONST:
+                stack[++sp] = code[ip++];
+                break;
+            case VM_POP:
+                --sp;
+                break;
+            case VM_PRINT:
+                VMPrint(stack[sp--]);
+                break;
+            case MODULE_BASE:
+                stack[++sp] = getModuleBase();
+            case VM_HALT:
+                return;
+            default:
+                _exception_handler.Handler(ExceptionHandler::EXCEPTION_UNKNOWN_OPCODE, opcode);
+                return;
         }
     }
 }

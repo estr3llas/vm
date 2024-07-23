@@ -10,7 +10,12 @@ PPEB getPeb() {
     return reinterpret_cast<PPEB>(__readgsqword(0x30));
 }
 
-PLDR_MODULE getNTDLL(const PPEB peb) {
+PVOID getModuleBase() {
+    const auto peb = getPeb();
+    return peb->ImageBase;
+}
+
+PLDR_MODULE getNTDLL(PPEB peb) {
     PPEB_LDR_DATA ldr_data = peb->LoaderData;
     LIST_ENTRY* list_entry = &(ldr_data->InMemoryOrderModuleList);
     //nasty !

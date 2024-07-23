@@ -9,5 +9,6 @@
 
 PPEB getPeb();
 PLDR_MODULE getNTDLL(PPEB peb);
+PVOID getModuleBase();
 
 #endif //PARSER_H

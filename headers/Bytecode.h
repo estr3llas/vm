@@ -31,7 +31,8 @@ enum Bytecode {
     VM_INC = 21,
     VM_DEC = 22,
     VM_NOP = 23,
-    VM_INTERMODULAR_CALL = 24
+    VM_INTERMODULAR_CALL = 24,
+    MODULE_BASE = 25
 };
 
 class Instruction {
@@ -50,7 +51,7 @@ public:
         operand(VM_ZERO)
     {};
 
-    Instruction(const char* _mnemonic, int _operand) :
+    Instruction(const char* _mnemonic, const int _operand) :
         mnemonic(_mnemonic),
         operand(_operand)
     {};
@@ -93,7 +94,8 @@ namespace Instructions {
             Instruction("VM_NOP"),
 
             //argument = index of function within a table
-            Instruction("VM_INTERMODULAR_CALL", 1)
+            Instruction("VM_INTERMODULAR_CALL", 1),
+            Instruction("MODULE_BASE")
     };
 }
 

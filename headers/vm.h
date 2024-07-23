@@ -80,7 +80,9 @@ public:
     VMReturn VMExec();
     void Cpu();
     void Disassemble(int32_t opcode);
-    static void VMPrint(int32_t arg);
+
+    template<typename  T>
+    static void VMPrint(T arg);
 
     [[nodiscard]] uint32_t get_ip() const;
 
