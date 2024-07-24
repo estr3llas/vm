@@ -15,13 +15,13 @@ PVOID getModuleBase() {
     return peb->ImageBase;
 }
 
-void *base_addr() {
+void *text_base_addr() {
     return nullptr;
 }
 
 PVOID getModuleBase2() {
     MEMORY_BASIC_INFORMATION meminfo;
-    VirtualQuery((LPCVOID)base_addr, &meminfo, sizeof(meminfo));
+    VirtualQuery((LPCVOID)text_base_addr, &meminfo, sizeof(meminfo));
 
     return meminfo.BaseAddress;
 }
