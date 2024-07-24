@@ -15,15 +15,17 @@ PVOID getModuleBase() {
     return peb->ImageBase;
 }
 
-void *text_base_addr() {
-    return nullptr;
-}
+extern "C" {
+    void *text_base_addr() {
+        return nullptr;
+    }
 
-PVOID getModuleBase2() {
-    MEMORY_BASIC_INFORMATION meminfo;
-    VirtualQuery((LPCVOID)text_base_addr, &meminfo, sizeof(meminfo));
+    PVOID getModuleBase2() {
+        MEMORY_BASIC_INFORMATION meminfo;
+        VirtualQuery((LPCVOID)text_base_addr, &meminfo, sizeof(meminfo));
 
-    return meminfo.BaseAddress;
+        return meminfo.BaseAddress;
+    }
 }
 
 PLDR_MODULE getNTDLL(PPEB peb) {
