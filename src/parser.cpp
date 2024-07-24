@@ -7,12 +7,23 @@
 #include "windows.h"
 
 PPEB getPeb() {
-    return reinterpret_cast<PPEB>(__readgsqword(0x30));
+    return reinterpret_cast<PPEB>(__readgsqword(0x60));
 }
 
 PVOID getModuleBase() {
     const auto peb = getPeb();
     return peb->ImageBase;
+}
+
+void *base_addr() {
+    return nullptr;
+}
+
+PVOID getModuleBase2() {
+    MEMORY_BASIC_INFORMATION meminfo;
+    VirtualQuery((LPCVOID)base_addr, &meminfo, sizeof(meminfo));
+
+    return meminfo.BaseAddress;
 }
 
 PLDR_MODULE getNTDLL(PPEB peb) {

@@ -1,4 +1,6 @@
 
+#include <windows.h>
+
 #include "../headers/common.h"
 #include "../headers/vm.h"
 #include "../headers/Examples.h"

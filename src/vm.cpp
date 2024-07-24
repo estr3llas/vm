@@ -245,7 +245,7 @@ void VM::Cpu() {
                 break;
             // pushes the module base to stack
             case MODULE_BASE:
-                stack[++sp] = reinterpret_cast<int64_t>(getModuleBase());
+                stack[++sp] = reinterpret_cast<int64_t>(getModuleBase2());
                 break;
             case VM_HALT:
                 return;
