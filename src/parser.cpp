@@ -9,7 +9,11 @@
 #define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
 
 PPEB getPeb() {
+#ifdef _M_X64
     return reinterpret_cast<PPEB>(__readgsqword(0x60));
+#elif _M_IX86
+    return reinterpret_cast<PPEB>(__readfsdword(0x30));
+#endif
 }
 
 PVOID getModuleBase() {
