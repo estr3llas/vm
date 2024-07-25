@@ -6,6 +6,8 @@
 
 #include "windows.h"
 
+#define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
+
 PPEB getPeb() {
     return reinterpret_cast<PPEB>(__readgsqword(0x60));
 }
@@ -22,7 +24,7 @@ extern "C" {
 
     PVOID getModuleBase2() {
         MEMORY_BASIC_INFORMATION meminfo;
-        VirtualQuery((LPCVOID)text_base_addr, &meminfo, sizeof(meminfo));
+        VirtualQueryEx(NtCurrentProcess(), (LPCVOID)text_base_addr, &meminfo, sizeof(meminfo));
 
         return meminfo.BaseAddress;
     }
