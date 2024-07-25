@@ -36,16 +36,16 @@ template<typename T>
 void VM::VMPrint(T arg){
 
     if(typeid(arg) == typeid(PVOID)) {
-        printf("%p\n", arg);
+        sprintf(stdout,"%p\n", arg);
         return;
     }
 
     if(typeid(arg) == typeid(int64_t)) {
-        printf("%llx\n", arg);
+        sprintf(stdout, "%llx\n", arg);
         return;
     }
 
-    printf("%d\n", arg);
+    sprintf(stdout, "%d\n", arg);
 }
 
 uint32_t VM::get_ip() const {
