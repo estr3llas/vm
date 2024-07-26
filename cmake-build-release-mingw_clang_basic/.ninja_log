@@ -93,3 +93,6 @@
 1117	1205	7436556414529003	simple_vm.exe	cbd75715e8c630e1
 5	1048	7436557550117239	CMakeFiles/simple_vm.dir/src/parser.cpp.obj	5f2eb360f93bbfd6
 1048	1142	7436557560546598	simple_vm.exe	cbd75715e8c630e1
+9	1073	7436585077143007	CMakeFiles/simple_vm.dir/src/parser.cpp.obj	5f2eb360f93bbfd6
+6	1113	7436585077122996	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
+1113	1202	7436585088182672	simple_vm.exe	cbd75715e8c630e1

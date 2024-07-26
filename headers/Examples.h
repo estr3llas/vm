@@ -102,6 +102,15 @@ namespace Examples {
         VM_RET
     };
 
+    constexpr int PUSH_MODULE_ENTRYPOINT = 0;
+    inline std::vector<int32_t> push_module = {
+        VM_CONST, 9,
+        VM_PRINT,
+        MODULE_BASE,
+        VM_PRINT,
+        VM_HALT
+    };
+
 }
 
 #endif //EXAMPLES_H

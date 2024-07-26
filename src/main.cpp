@@ -26,19 +26,13 @@ std::vector<int32_t> test = {
 
 int main (int argc, char** argv) {
 
-    /*if(argc < 2) printf(USAGE, VM_VERSION);
+    //if(argc < 2) printf(USAGE, VM_VERSION);
 
-    VM vm (test, 0, 0);
+    VM vm (Examples::push_module, Examples::PUSH_MODULE_ENTRYPOINT, 0);
     vm.SetTrace(VM_TRUE);
     const VMReturn ret = vm.VMExec();
 
     printf("\n[!] VMReturn: %d", ret);
-    */
-
-    auto peb = getPeb();
-    PVOID ntdll = getNTDLL(peb);
-
-    printf("%p\n", ntdll);
 
     return 0;
 }
