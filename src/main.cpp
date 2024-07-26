@@ -16,14 +16,6 @@
                 " [+] Usage: vm.exe <bytecode>\n\n"                   \
                 " Contact: https://github.com/estr3llas\n\n"
 
-std::vector<int32_t> test = {
-    VM_CONST, 9,
-    VM_PRINT,
-    MODULE_BASE,
-    VM_PRINT,
-    VM_HALT
-};
-
 int main (int argc, char** argv) {
 
     //if(argc < 2) printf(USAGE, VM_VERSION);
