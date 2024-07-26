@@ -8,7 +8,7 @@
 #include "peb.h"
 
 PPEB getPeb();
-PLDR_MODULE getNTDLL(PPEB peb);
+PVOID getNTDLL(PPEB peb);
 PVOID getModuleBase();
 
 extern "C" {

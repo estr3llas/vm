@@ -34,11 +34,11 @@ extern "C" {
     }
 }
 
-PLDR_MODULE getNTDLL(PPEB peb) {
-    PPEB_LDR_DATA ldr_data = peb->LoaderData;
-    LIST_ENTRY* list_entry = &(ldr_data->InMemoryOrderModuleList);
-    //nasty !
-    const auto ldr_data_table_entry = reinterpret_cast<PLDR_DATA_TABLE_ENTRY>(list_entry->Flink->Flink->Flink);
+PVOID getNTDLL(PPEB peb) {
+    const PPEB_LDR_DATA ldr_data = peb->LoaderData;
+    const auto& [flink, blink] = ldr_data->InLoadOrderModuleList;
+    // NASTY !
+    const auto ntdll = reinterpret_cast<PLDR_DATA_TABLE_ENTRY>(flink->Flink->Flink);
 
-    return static_cast<PLDR_MODULE>(ldr_data_table_entry->DllBase);
+    return ntdll->DllBase;
 }
