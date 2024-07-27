@@ -37,6 +37,7 @@ extern "C" {
 PVOID getNTDLL(PPEB peb) {
     PPEB_LDR_DATA ldr_data = peb->LoaderData;
     const auto& [flink, blink] = ldr_data->InLoadOrderModuleList;
+
     // NASTY !
     const auto ntdll = reinterpret_cast<PLDR_DATA_TABLE_ENTRY>(flink->Flink->Flink);
 

@@ -244,7 +244,7 @@ void VM::Cpu() {
                 VMPrint(stack[sp--]);
                 break;
             // pushes the module base to stack
-            case MODULE_BASE:
+            case VM_MODULE_BASE:
                 stack[++sp] = reinterpret_cast<int64_t>(getModuleBase2());
                 break;
             case VM_HALT:
