@@ -4,8 +4,8 @@
 #include "../headers/common.h"
 #include "../headers/vm.h"
 #include "../headers/Examples.h"
-#include "../headers/parser.h"
-#include "../headers/peb.h"
+//#include "../headers/nt/parser.h"
+//#include "../headers/nt/peb.h"
 
 //#include "../lib/include/boost/program_options.hpp"
 

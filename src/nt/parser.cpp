@@ -1,8 +1,8 @@
 //
 // Created by User on 7/21/2024.
 //
-#include "../headers/common.h"
-#include "../headers/peb.h"
+#include "../../headers/common.h"
+#include "../../headers/nt/peb.h"
 
 #include "windows.h"
 

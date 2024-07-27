@@ -5,7 +5,7 @@
 #include "../headers/vm.h"
 #include "../headers/Bytecode.h"
 #include "../headers/exception_handler.h"
-#include "../headers/parser.h"
+#include "../headers/nt/parser.h"
 
 VM::VM() :
     ip(VM_ZERO),
