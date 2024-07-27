@@ -46,10 +46,10 @@ PVOID getNTDLL(PPEB peb) {
 }
 
 PIMAGE_EXPORT_DIRECTORY getNTDLLExportTable(DWORD_PTR ntdll) {
-    const auto dosHdr = reinterpret_cast<PIMAGE_DOS_HEADER>(ntdll);
-    const auto ntHdr = reinterpret_cast<PIMAGE_NT_HEADERS>(ntdll + dosHdr->e_lfanew);
+    const auto dos = reinterpret_cast<PIMAGE_DOS_HEADER>(ntdll);
+    const auto nt = reinterpret_cast<PIMAGE_NT_HEADERS>(ntdll + dos->e_lfanew);
 
-    const auto optHdr = &(ntHdr->OptionalHeader);
-    return reinterpret_cast<PIMAGE_EXPORT_DIRECTORY>(ntdll + optHdr->DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
+    const auto opt = &(nt->OptionalHeader);
+    return reinterpret_cast<PIMAGE_EXPORT_DIRECTORY>(ntdll + opt->DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
 }
 
