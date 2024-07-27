@@ -106,7 +106,7 @@ namespace Examples {
     inline std::vector<int32_t> push_module = {
         VM_CONST, 9,
         VM_PRINT,
-        MODULE_BASE,
+        VM_MODULE_BASE,
         VM_PRINT,
         VM_HALT
     };
