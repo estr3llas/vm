@@ -7,13 +7,14 @@
 
 #include "peb.h"
 
-static PPEB getPeb();
+//static PPEB getPeb();
+PPEB getPeb();
 PVOID getModuleBase();
 extern "C" {
     PVOID getModuleBase2();
 }
 
 PVOID getNTDLL(PPEB peb);
-int64_t getNTDLL2();
+PIMAGE_EXPORT_DIRECTORY getNTDLLExportTable(DWORD_PTR ntdll);
 
 #endif //PARSER_H
