@@ -79,7 +79,7 @@ public:
 
     VMReturn VMExec();
     void Cpu();
-    void Disassemble(int32_t opcode);
+    void Disassemble(int32_t opcode) const;
 
     template<typename  T>
     static void VMPrint(T arg);

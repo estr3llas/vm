@@ -62,7 +62,7 @@ const std::string& VM::GetBcFilename() {
     return bc_filename;
 }
 
-void VM::Disassemble(const int32_t opcode) {
+void VM::Disassemble(const int32_t opcode) const {
 
     if (ip >= code.size()) return;
 
