@@ -15,6 +15,12 @@
 #define VM_ZERO (0)
 #define VM_SP_START (-1)
 
+#define vm_print_ok(fmt, ...) \
+    fprintf(stdout, (fmt) __VA_OPT__(,) __VA_ARGS__)
+
+#define vm_print_err(fmt, ...) \
+    fprintf(stderr, (fmt) __VA_OPT__(,) __VA_ARGS__)
+
 class Context {
 private:
 

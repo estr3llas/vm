@@ -28,21 +28,21 @@ void ExceptionHandler::Handler(const uint32_t exception_code, const int32_t opco
 
     switch(exception_code){
         case EXCEPTION_DIVIDE_BY_ZERO:
-            fprintf(stderr, "\n[-] Line %d in %s:\n\tEXCEPTION_DIVIDE_BY_ZERO: Operation not permitted.\n", (get_ip()-1), filename.c_str());
-        EH_exit();
-        break;
+            vm_print_err("\n[-] Line %d in %s:\n\tEXCEPTION_DIVIDE_BY_ZERO: Operation not permitted.\n", (get_ip()-1), filename.c_str());
+            EH_exit();
+            break;
         case EXCEPTION_UNKNOWN_OPCODE:
-            fprintf(stderr, "\n[-] Line %d in %s:\n\t[-] EXCEPTION_UNKNOWN_OPCODE: Unknown opcode: %d\n", (get_ip()-1), filename.c_str(), opcode);
-        EH_exit();
-        break;
+            vm_print_err("\n[-] Line %d in %s:\n\t[-] EXCEPTION_UNKNOWN_OPCODE: Unknown opcode: %d\n", (get_ip()-1), filename.c_str(), opcode);
+            EH_exit();
+            break;
         case EXCEPTION_ARITHMETIC_OVERFLOW:
-            fprintf(stderr, "\n[-] Line %d in %s:\n\t[-] EXCEPTION_ARITHMETIC_OVERFLOW: The maximum integer size is 32-bit.", (get_ip()-1), filename.c_str());
-        EH_exit();
-        break;
+            vm_print_err("\n[-] Line %d in %s:\n\t[-] EXCEPTION_ARITHMETIC_OVERFLOW: The maximum integer size is 32-bit.", (get_ip()-1), filename.c_str());
+            EH_exit();
+            break;
         case EXCEPTION_IP_OVERFLOW:
-            fprintf(stderr, "\n[-] Line %d in %s:\n\t[-] EXCEPTION_IP_OVERFLOW: The Instruction pointer is bigger than the bytecode boundaries.", (get_ip()-1), filename.c_str());
-        EH_exit();
-        break;
+            vm_print_err("\n[-] Line %d in %s:\n\t[-] EXCEPTION_IP_OVERFLOW: The Instruction pointer is bigger than the bytecode boundaries.", (get_ip()-1), filename.c_str());
+            EH_exit();
+            break;
         default:
             return;
     }

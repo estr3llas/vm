@@ -7,12 +7,6 @@
 #include "../headers/exception_handler.h"
 #include "../headers/nt/parser.h"
 
-#define vm_print_ok(fmt, ...) \
-    fprintf(stdout, (fmt) __VA_OPT__(,) __VA_ARGS__)
-
-#define vm_print_err(fmt, ...) \
-    fprintf(stderr, (fmt) __VA_OPT__(,) __VA_ARGS__)
-
 VM::VM() :
     ip(VM_ZERO),
     sp(),
