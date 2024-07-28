@@ -7,6 +7,8 @@
 #include "../headers/exception_handler.h"
 #include "../headers/nt/parser.h"
 
+#define vm_print(fmt, arg) fprintf(stdout, (fmt), (arg))
+
 VM::VM() :
     ip(VM_ZERO),
     sp(),
@@ -41,7 +43,7 @@ void VM::VMPrint(T arg){
     }
 
     if(typeid(arg) == typeid(int64_t)) {
-        fprintf(stdout, "%llx\n", arg);
+        vm_print("%llx\n", arg);
         return;
     }
 
@@ -73,13 +75,13 @@ void VM::Disassemble(const int32_t opcode) const {
     //print operands
     switch (instr.getOperand()) {
         case 1:
-            printf(" %d", code[ip + 1]);
+            fprintf(stdout, " %d", code[ip + 1]);
             break;
         case 2:
-            printf(" %d, %d", code[ip + 1], code[ip + 2]);
+            fprintf(stdout, " %d, %d", code[ip + 1], code[ip + 2]);
             break;
         case 3:
-            printf(" %d, %d, %d", code[ip + 1], code[ip + 2], code[ip + 3]);
+            fprintf(stdout, " %d, %d, %d", code[ip + 1], code[ip + 2], code[ip + 3]);
             break;
         default:
             noops = true;
@@ -87,19 +89,19 @@ void VM::Disassemble(const int32_t opcode) const {
     }
 
     //print current stack
-    printf("\t\t");
-    if(noops) printf("\t");
+    fprintf(stdout, "\t\t");
+    if(noops) fprintf(stdout, "\t");
     if (sp == -1) {
-        printf("[ ]\n");
+        fprintf(stdout, "[ ]\n");
     } else {
-        printf("[");
+        fprintf(stdout, "[");
         for (int i = 0; i <= sp; ++i) {
-        printf("%ld", stack[i]);
+        fprintf(stdout, "%ld", stack[i]);
         if (i < sp) {
-            printf(", ");
+            fprintf(stdout, ", ");
         }
         }
-        printf("]\n");
+        fprintf(stdout, "]\n");
     }
 }
 
@@ -109,6 +111,7 @@ VMReturn VM::VMExec() {
     return STATUS_EXECUTION_OK;
 }
 
+// hacky
 int_fast32_t global_mem[DATA_MAX_SIZE];
 int_fast64_t global_mem_64[DATA_MAX_SIZE];
 
