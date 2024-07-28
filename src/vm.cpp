@@ -7,7 +7,8 @@
 #include "../headers/exception_handler.h"
 #include "../headers/nt/parser.h"
 
-#define vm_print(fmt, arg) fprintf(stdout, (fmt), (arg))
+#define vm_print_ok(fmt, ...) \
+    fprintf(stdout, (fmt) __VA_OPT__(,) __VA_ARGS__)
 
 VM::VM() :
     ip(VM_ZERO),
@@ -38,16 +39,16 @@ template<typename T>
 void VM::VMPrint(T arg){
 
     if(typeid(arg) == typeid(PVOID)) {
-        fprintf(stdout,"%p\n", arg);
+        vm_print_ok("%p\n", arg);
         return;
     }
 
     if(typeid(arg) == typeid(int64_t)) {
-        vm_print("%llx\n", arg);
+        vm_print_ok("%llx\n", arg);
         return;
     }
 
-    fprintf(stdout, "%d\n", arg);
+    vm_print_ok("%d\n", arg);
 }
 
 uint32_t VM::get_ip() const {
@@ -75,13 +76,13 @@ void VM::Disassemble(const int32_t opcode) const {
     //print operands
     switch (instr.getOperand()) {
         case 1:
-            fprintf(stdout, " %d", code[ip + 1]);
+            vm_print_ok(" %d", code[ip + 1]);
             break;
         case 2:
-            fprintf(stdout, " %d, %d", code[ip + 1], code[ip + 2]);
+            vm_print_ok(" %d, %d", code[ip + 1], code[ip + 2]);
             break;
         case 3:
-            fprintf(stdout, " %d, %d, %d", code[ip + 1], code[ip + 2], code[ip + 3]);
+            vm_print_ok(" %d, %d, %d", code[ip + 1], code[ip + 2], code[ip + 3]);
             break;
         default:
             noops = true;
@@ -89,19 +90,19 @@ void VM::Disassemble(const int32_t opcode) const {
     }
 
     //print current stack
-    fprintf(stdout, "\t\t");
-    if(noops) fprintf(stdout, "\t");
+    vm_print_ok("\t\t");
+    if(noops) vm_print_ok("\t");
     if (sp == -1) {
-        fprintf(stdout, "[ ]\n");
+        vm_print_ok("[ ]\n");
     } else {
-        fprintf(stdout, "[");
+        vm_print_ok("[");
         for (int i = 0; i <= sp; ++i) {
-        fprintf(stdout, "%ld", stack[i]);
+            vm_print_ok("%ld", stack[i]);
         if (i < sp) {
-            fprintf(stdout, ", ");
+            vm_print_ok(", ");
         }
         }
-        fprintf(stdout, "]\n");
+        vm_print_ok("]\n");
     }
 }
 
