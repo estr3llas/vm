@@ -172,6 +172,6 @@ typedef struct LDR_DATA_TABLE_ENTRY
     ULONG ReferenceCount;                                                   //0x114
     ULONG DependentLoadFlags;                                               //0x118
     UCHAR SigningLevel;                                                     //0x11c
-} _LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
+} LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
 
 #endif //PEB_H
