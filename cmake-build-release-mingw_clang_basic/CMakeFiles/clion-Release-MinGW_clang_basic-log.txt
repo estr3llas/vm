@@ -1,4 +1,4 @@
 "C:\Program Files\JetBrains\CLion 2024.1.4\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.1.4/bin/ninja/win/x64/ninja.exe" -DCMAKE_C_COMPILER=C:/msys64/mingw64/bin/clang.exe -DCMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/clang++.exe -G Ninja -DLLVM_ENABLE_PROJECTS=clang;clang-tools-extra;compiler-rt;lld -DCMAKE_eXPORT_COMPILE_cOMMANDS=1 -DLLVM_USE_LINKER=lld -DCMAKE_LINKER=lld -DHAVE_CXX_ATOMICS64_WITHOUT_LIB=1 -DHAVE_CXX_ATOMICS_WITHOUT_LIB=1 -S C:\Users\User\CLionProjects\simple_vm -B C:\Users\User\CLionProjects\simple_vm\cmake-build-release-mingw_clang_basic
--- Configuring done (0.6s)
+-- Configuring done (0.2s)
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Users/User/CLionProjects/simple_vm/cmake-build-release-mingw_clang_basic

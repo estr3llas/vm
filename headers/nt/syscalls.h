@@ -25,4 +25,5 @@ typedef enum MEMORY_INFORMATION_CLASS
     MaxMemoryInfoClass
 } MEMORY_INFORMATION_CLASS;
 
+
 #endif //SYSCALLS_H
