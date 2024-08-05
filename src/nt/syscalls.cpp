@@ -24,4 +24,16 @@ extern "C" {
         _In_ ULONG Protect
     );
 
+    NTSYSCALLAPI
+    NTSTATUS
+    NTAPI
+    NtFreeVirtualMemory(
+        _In_ HANDLE ProcessHandle,
+        _Inout_ PVOID *BaseAddress,
+        _Inout_ PSIZE_T RegionSize,
+        _In_ ULONG FreeType
+    );
+
+
+
 }
