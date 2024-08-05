@@ -35,6 +35,7 @@ extern "C" {
         _In_ ULONG FreeType
     );
 
+    // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L626
     NTSYSCALLAPI
     NTSTATUS
     NTAPI

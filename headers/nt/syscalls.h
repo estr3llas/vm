@@ -5,6 +5,7 @@
 #ifndef SYSCALLS_H
 #define SYSCALLS_H
 
+// https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L83
 typedef enum MEMORY_INFORMATION_CLASS
 {
     MemoryBasicInformation,                 // q: MEMORY_BASIC_INFORMATION
