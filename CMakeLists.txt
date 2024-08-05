@@ -15,4 +15,4 @@ add_executable(simple_vm src/main.cpp
         headers/nt/peb.h
         headers/nt/parser.h
         headers/nt/syscalls.h
-        src/nt/syscalls.cpp)
+)
