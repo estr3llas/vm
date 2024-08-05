@@ -24,6 +24,7 @@ extern "C" {
         _In_ ULONG Protect
     );
 
+    // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L568
     NTSYSCALLAPI
     NTSTATUS
     NTAPI
@@ -34,6 +35,16 @@ extern "C" {
         _In_ ULONG FreeType
     );
 
-
+    NTSYSCALLAPI
+    NTSTATUS
+    NTAPI
+    NtQueryVirtualMemory(
+        _In_ HANDLE ProcessHandle,
+        _In_opt_ PVOID BaseAddress,
+        _In_ MEMORY_INFORMATION_CLASS MemoryInformationClass,
+        _Out_writes_bytes_(MemoryInformationLength) PVOID MemoryInformation,
+        _In_ SIZE_T MemoryInformationLength,
+        _Out_opt_ PSIZE_T ReturnLength
+    );
 
 }
