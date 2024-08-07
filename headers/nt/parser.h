@@ -7,8 +7,7 @@
 
 #include "peb.h"
 
-//static PPEB getPeb();
-PPEB getPeb();
+static PPEB getPeb();
 PVOID getModuleBase();
 extern "C" {
     PVOID getModuleBase2();

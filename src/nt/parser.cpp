@@ -8,8 +8,7 @@
 
 #define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
 
-//static PPEB getPeb() {
-PPEB getPeb() {
+static PPEB getPeb() {
 #ifdef _M_X64
     return reinterpret_cast<PPEB>(__readgsqword(0x60));
 #elif _M_IX86
