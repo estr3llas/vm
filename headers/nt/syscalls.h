@@ -5,7 +5,7 @@
 #ifndef SYSCALLS_H
 #define SYSCALLS_H
 
-#pragma once
+#pragma comment(lib, "ntdll")
 #include <Windows.h>
 
 // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L83
@@ -29,15 +29,32 @@ typedef enum MEMORY_INFORMATION_CLASS
 } MEMORY_INFORMATION_CLASS;
 
 namespace Syscall {
+
+    namespace alloc {
+        enum class AllocationType : ULONG {
+            Commit = 0x1000,
+            Reserve = 0x2000,
+            Reset = 0x80000,
+        };
+
+        enum class Protection : ULONG {
+            No_Access = 0x01,
+            Read_Only = 0x02,
+            Read_Write = 0x04,
+            Execute = 0x10,
+            Execute_Read = 0x20,
+            Guard = 0x100,
+            No_Cache = 0x200,
+            WriteCombine = 0x400
+        };
+    }
+
     extern "C" {
 
         // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L532
-        _Must_inspect_result_
-        _When_(return == 0, __drv_allocatesMem(mem))
-        NTSYSCALLAPI
+        typedef
         NTSTATUS
-        NTAPI
-        NtAllocateVirtualMemory(
+        (NTAPI* NtAllocateVirtualMemory)(
             _In_ HANDLE ProcessHandle,
             _Inout_ _At_(*BaseAddress, _Readable_bytes_(*RegionSize) _Writable_bytes_(*RegionSize) _Post_readable_byte_size_(*RegionSize)) PVOID *BaseAddress,
             _In_ ULONG_PTR ZeroBits,
@@ -47,10 +64,10 @@ namespace Syscall {
         );
 
         // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L568
+        typedef
         NTSYSCALLAPI
         NTSTATUS
-        NTAPI
-        NtFreeVirtualMemory(
+        (NTAPI* NtFreeVirtualMemory)(
             _In_ HANDLE ProcessHandle,
             _Inout_ PVOID *BaseAddress,
             _Inout_ PSIZE_T RegionSize,
@@ -58,10 +75,9 @@ namespace Syscall {
         );
 
         // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L626
-        NTSYSCALLAPI
+        typedef
         NTSTATUS
-        NTAPI
-        NtQueryVirtualMemory(
+        (NTAPI NtQueryVirtualMemory)(
             _In_ HANDLE ProcessHandle,
             _In_opt_ PVOID BaseAddress,
             _In_ MEMORY_INFORMATION_CLASS MemoryInformationClass,

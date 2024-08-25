@@ -16,7 +16,7 @@ int main (int argc, char** argv) {
 
     VM vm (Examples::push_module, Examples::PUSH_MODULE_ENTRYPOINT, 0);
     vm.SetTrace(VM_TRUE);
-    const VMReturn ret = vm.VMExec();
+    vm.VMExec();
 
     return 0;
 }
