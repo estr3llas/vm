@@ -13,7 +13,9 @@ auto FnVMAlloc(PSIZE_T sz, const ULONG type, const ULONG protect) -> NTSTATUS {
     PVOID ba;
 
     const static auto ntdll = getNTDLL(getPeb());
-    const static auto pNtAllocateVirtualMemory = reinterpret_cast<Syscall::NtAllocateVirtualMemory>(GetProcAddress(static_cast<HMODULE>(ntdll), "NtAllocateVirtualMemory"));
+    const static auto pNtAllocateVirtualMemory = reinterpret_cast<Syscall::NtAllocateVirtualMemory>(
+        GetProcAddress(static_cast<HMODULE>(ntdll), "NtAllocateVirtualMemory")
+        );
 
     return pNtAllocateVirtualMemory(NtCurrentProcess(), &ba, 0, sz, type, protect);
 }

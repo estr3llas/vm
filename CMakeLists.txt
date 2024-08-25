@@ -17,4 +17,5 @@ add_executable(simple_vm src/main.cpp
         headers/nt/syscalls.h
         headers/misc/usage.h
         src/nt/syscalls.cpp
+        headers/nt/params.h
 )
