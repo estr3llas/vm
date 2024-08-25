@@ -98,8 +98,8 @@ namespace Instructions {
             //argument = index of function within a table
             Instruction("VM_INTERMODULAR_CALL", 1),
             Instruction("VM_MODULE_BASE"),
-            Instruction("VM_ALLOC", 3),
-            Instruction("VM_FREE", 3),
+            Instruction("VM_ALLOC"),
+            Instruction("VM_FREE"),
     };
 }
 
