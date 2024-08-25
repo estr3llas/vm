@@ -252,10 +252,25 @@ void VM::Cpu() {
             break;
             // the top 3 values of stacks will be popped in order to pass as parameters to FnVMAlloc
             case VM_ALLOC:
-                static SIZE_T sz = stack[sp--];
-                const static ULONG type = stack[sp--];
-                const static ULONG protect = stack[sp--];
-                stack[++sp] = reinterpret_cast<int64_t>(vm_alloc(&sz, type, protect));
+                SIZE_T alloc_size = stack[sp--];
+                if (const ULONG alloc_type = stack[sp--];
+                    const ULONG alloc_protect = stack[sp--])
+                {
+                    PVOID result = vm_alloc(&alloc_size, alloc_type, alloc_protect);
+                    stack[++sp] = reinterpret_cast<int64_t>(result);
+                }
+            break;
+            case VM_FREE:
+                static auto free_ba = stack[sp--];
+                SIZE_T free_size = stack[sp--];
+                if (const ULONG free_type = stack[sp--];
+                    vm_free(reinterpret_cast<PVOID>(free_ba), &free_size, free_type) == STATUS_SUCCESS)
+                {
+                    stack[++sp] = 0;
+                    break;
+                }
+                stack[++sp] = 1;
+            break;
             break;
             case VM_HALT:
                 return;

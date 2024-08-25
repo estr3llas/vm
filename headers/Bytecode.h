@@ -34,6 +34,7 @@ enum Bytecode {
     VM_INTERMODULAR_CALL = 24,
     VM_MODULE_BASE = 25,
     VM_ALLOC = 26,
+    VM_FREE = 27,
 };
 
 class Instruction {
@@ -98,6 +99,7 @@ namespace Instructions {
             Instruction("VM_INTERMODULAR_CALL", 1),
             Instruction("VM_MODULE_BASE"),
             Instruction("VM_ALLOC", 3),
+            Instruction("VM_FREE", 3),
     };
 }
 
