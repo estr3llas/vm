@@ -29,6 +29,14 @@ namespace NtAllocateVirtualMemory_params {
 
 namespace NtFreeVirtualMemory_params {
 
+    enum class FreeType : ULONG {
+        Mem_Decommit = 0x4000,
+        Mem_Release = 0x8000
+    };
+}
+
+namespace NtQueryVirtualMemory_params {
+
     // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L83
     typedef enum MEMORY_INFORMATION_CLASS
     {
@@ -48,11 +56,6 @@ namespace NtFreeVirtualMemory_params {
         MemoryBadInformationAllProcesses,       // since 22H1
         MaxMemoryInfoClass
     } MEMORY_INFORMATION_CLASS;
-
-    enum class FreeType : ULONG {
-        Mem_Decommit = 0x4000,
-        Mem_Release = 0x8000
-    };
 }
 
 #endif //PARAMS_H

@@ -45,7 +45,7 @@ namespace Syscall {
         (NTAPI* NtQueryVirtualMemory)(
             _In_ HANDLE ProcessHandle,
             _In_opt_ PVOID BaseAddress,
-            _In_ NtFreeVirtualMemory_params::MEMORY_INFORMATION_CLASS MemoryInformationClass,
+            _In_ NtQueryVirtualMemory_params::MEMORY_INFORMATION_CLASS MemoryInformationClass,
             _Out_writes_bytes_(MemoryInformationLength) PVOID MemoryInformation,
             _In_ SIZE_T MemoryInformationLength,
             _Out_opt_ PSIZE_T ReturnLength
