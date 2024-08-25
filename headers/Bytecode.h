@@ -32,7 +32,8 @@ enum Bytecode {
     VM_DEC = 22,
     VM_NOP = 23,
     VM_INTERMODULAR_CALL = 24,
-    VM_MODULE_BASE = 25
+    VM_MODULE_BASE = 25,
+    VM_ALLOC = 26,
 };
 
 class Instruction {
@@ -95,7 +96,8 @@ namespace Instructions {
 
             //argument = index of function within a table
             Instruction("VM_INTERMODULAR_CALL", 1),
-            Instruction("VM_MODULE_BASE")
+            Instruction("VM_MODULE_BASE"),
+            Instruction("VM_ALLOC", 3),
     };
 }
 

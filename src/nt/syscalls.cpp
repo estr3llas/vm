@@ -9,7 +9,7 @@
 
 #pragma comment(lib, "ntdll")
 
-auto FnVMAlloc(PSIZE_T sz, const ULONG type, const ULONG protect) -> NTSTATUS {
+auto vm_alloc(PSIZE_T sz, const ULONG type, const ULONG protect) -> PVOID {
     PVOID ba;
 
     const static auto ntdll = getNTDLL(getPeb());
@@ -17,5 +17,8 @@ auto FnVMAlloc(PSIZE_T sz, const ULONG type, const ULONG protect) -> NTSTATUS {
         GetProcAddress(static_cast<HMODULE>(ntdll), "NtAllocateVirtualMemory")
         );
 
-    return pNtAllocateVirtualMemory(NtCurrentProcess(), &ba, 0, sz, type, protect);
+    if(pNtAllocateVirtualMemory(NtCurrentProcess(), &ba, 0, sz, type, protect) == STATUS_SUCCESS)
+        return ba;
+
+    return nullptr;
 }

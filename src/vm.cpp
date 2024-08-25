@@ -6,6 +6,8 @@
 #include "../headers/Bytecode.h"
 #include "../headers/exception_handler.h"
 #include "../headers/nt/parser.h"
+#include "../headers/nt/syscalls.h"
+#include "../headers/nt/params.h"
 
 VM::VM() :
     ip(VM_ZERO),
@@ -137,21 +139,21 @@ void VM::Cpu() {
         switch (opcode) {
             case VM_NOP:
                 // just for padding
-                break;
+            break;
             case VM_GLOAD:
                 addr = code[ip];
                 ip++;
                 operand = global_mem[addr];
                 sp++;
                 stack[sp] = operand;
-                break;
+            break;
             case VM_GSTORE:
                 operand_64 = stack[sp];
                 sp--;
                 addr = code[ip];
                 ip++;
                 global_mem_64[addr] = operand_64;
-                break;
+            break;
             case VM_CALL:
                 addr = code[ip++];
                 nargs = code[ip++];
@@ -163,56 +165,56 @@ void VM::Cpu() {
                 }
                 sp -= nargs;
                 ip = addr;
-                break;
+            break;
             case VM_RET:
                 //ctx = call_stack.back();
                 call_stack.pop_back();
                 ip = ctx.getReturnIp();
-                break;
+            break;
             case VM_LOAD:
                 offset = code[ip++];
                 ctx = Context(&ctx, ip, LOCALS_MAX_SIZE);
                 stack[++sp] = ctx.getLocals()[offset];
-                break;
+            break;
             case VM_EQ:
                 b = stack[sp--];
                 a = stack[sp--];
-                stack[++sp] = (a == b) ? VM_TRUE : VM_FALSE;
-                break;
+                stack[++sp] = a == b;
+            break;
             case VM_LT:
                 b = stack[sp--];
                 a = stack[sp--];
-                stack[++sp] = (a < b) ? VM_TRUE : VM_FALSE;
-                break;
+                stack[++sp] = a < b;
+            break;
             case VM_BR:
                 ip = code[ip++];
-                break;
+            break;
             case VM_BRT:
                 addr = code[ip++];
                 if (stack[sp--] == VM_TRUE) ip = addr;
-                break;
+            break;
             case VM_BRF:
                 addr = code[ip++];
                 if (stack[sp--] == VM_FALSE) ip = addr;
-                break;
+            break;
             case VM_ADD:
                 b = stack[sp--];
                 a = stack[sp--];
                 _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
                 stack[++sp] = a + b;
-                break;
+            break;
             case VM_SUB:
                 b = stack[sp--];
                 a = stack[sp--];
                 _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
                 stack[++sp] = a - b;
-                break;
+            break;
             case VM_MUL:
                 b = stack[sp--];
                 a = stack[sp--];
                 _exception_handler.CheckForArithmeticOverflow(a, b, opcode);
                 stack[++sp] = a * b;
-                break;
+            break;
             case VM_DIV:
                 b = stack[sp--];
                 a = stack[sp--];
@@ -220,34 +222,41 @@ void VM::Cpu() {
                     _exception_handler.Handler(ExceptionHandler::EXCEPTION_DIVIDE_BY_ZERO, opcode);
                 }
                 stack[++sp] = a / b;
-                break;
+            break;
             case VM_NEG:
                 a = stack[sp--];
                 stack[++sp] = (-a);
-                break;
+            break;
             case VM_INC:
                 a = stack[sp--];
                 a = a + 1;
                 stack[++sp] = a;
-                break;
+            break;
             case VM_DEC:
                 a = stack[sp--];
                 a = a - 1;
                 stack[++sp] = a;
-                break;
+            break;
             case VM_CONST:
                 stack[++sp] = code[ip++];
-                break;
+            break;
             case VM_POP:
                 --sp;
-                break;
+            break;
             case VM_PRINT:
                 VMPrint(stack[sp--]);
-                break;
+            break;
             // pushes the module base to stack
             case VM_MODULE_BASE:
                 stack[++sp] = reinterpret_cast<int64_t>(getModuleBase2());
-                break;
+            break;
+            // the top 3 values of stacks will be popped in order to pass as parameters to FnVMAlloc
+            case VM_ALLOC:
+                SIZE_T sz = stack[sp--];
+                const ULONG type = stack[sp--];
+                const ULONG protect = stack[sp--];
+                stack[++sp] = reinterpret_cast<int64_t>(vm_alloc(&sz, type, protect));
+            break;
             case VM_HALT:
                 return;
             default:

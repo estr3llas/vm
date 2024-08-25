@@ -8,6 +8,8 @@
 #pragma comment(lib, "ntdll")
 #include <Windows.h>
 
+#define STATUS_SUCCESS 0x00000000
+
 // https://github.com/winsiderss/systeminformer/blob/c2e84fb8ac3bd33ce63c5d55f9e5fb6720d382e0/phnt/include/ntmmapi.h#L83
 typedef enum MEMORY_INFORMATION_CLASS
 {
@@ -29,7 +31,6 @@ typedef enum MEMORY_INFORMATION_CLASS
 } MEMORY_INFORMATION_CLASS;
 
 namespace Syscall {
-
 
     extern "C" {
 
@@ -69,5 +70,7 @@ namespace Syscall {
         );
     }
 }
+
+PVOID vm_alloc(PSIZE_T sz, const ULONG type, const ULONG protect);
 
 #endif //SYSCALLS_H
