@@ -22,3 +22,13 @@ auto vm_alloc(PSIZE_T sz, const ULONG type, const ULONG protect) -> PVOID {
 
     return nullptr;
 }
+
+auto vm_free(PVOID ba, PSIZE_T sz, const ULONG type) -> NTSTATUS {
+
+    const static auto ntdll = getNTDLL(getPeb());
+    const static auto pNtFreeVirtualMemory = reinterpret_cast<Syscall::NtFreeVirtualMemory>(
+        GetProcAddress(static_cast<HMODULE>(ntdll), "NtFreeVirtualMemory")
+        );
+
+    return pNtFreeVirtualMemory(NtCurrentProcess(), &ba, sz, type);
+}

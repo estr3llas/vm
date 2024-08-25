@@ -248,13 +248,13 @@ void VM::Cpu() {
             break;
             // pushes the module base to stack
             case VM_MODULE_BASE:
-                stack[++sp] = reinterpret_cast<int64_t>(getModuleBase2());
+                stack[++sp] = reinterpret_cast<int64_t>(getModuleBase());
             break;
             // the top 3 values of stacks will be popped in order to pass as parameters to FnVMAlloc
             case VM_ALLOC:
-                SIZE_T sz = stack[sp--];
-                const ULONG type = stack[sp--];
-                const ULONG protect = stack[sp--];
+                static SIZE_T sz = stack[sp--];
+                const static ULONG type = stack[sp--];
+                const static ULONG protect = stack[sp--];
                 stack[++sp] = reinterpret_cast<int64_t>(vm_alloc(&sz, type, protect));
             break;
             case VM_HALT:
