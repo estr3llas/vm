@@ -4,7 +4,7 @@
 #include "../headers/common.h"
 #include "../headers/vm.h"
 #include "../headers/Bytecode.h"
-#include "../headers/exception_handler.h"
+#include "../headers/exceptions.h"
 #include "../headers/nt/parser.h"
 #include "../headers/nt/syscalls.h"
 #include "../headers/nt/params.h"
@@ -71,7 +71,7 @@ void VM::Disassemble(const int32_t opcode) const {
     const Instruction instr = Instructions::opcodes[opcode];
     printf("%04d: %-16s", ip, instr.getMnemonic());
 
-    static bool noops = false;
+    bool noops = false;
     //print operands
     switch (instr.getOperand()) {
         case 1:
@@ -123,10 +123,10 @@ void VM::Cpu() {
         _exception_handler.Handler(ExceptionHandler::EXCEPTION_IP_OVERFLOW, 0);
     }
 
-    static int32_t operand, addr, offset;
-    static int64_t a, b, operand_64;
-    static int32_t first_arg;
-    static int32_t nargs;
+    int32_t operand, addr, offset;
+    int64_t a, b, operand_64;
+    int32_t first_arg;
+    int32_t nargs;
 
     std::vector<Context> call_stack;
 
@@ -252,25 +252,25 @@ void VM::Cpu() {
             break;
             // the top 3 values of stacks will be popped in order to pass as parameters to FnVMAlloc
             case VM_ALLOC:
+            {
                 SIZE_T alloc_size = stack[sp--];
-                if (const ULONG alloc_type = stack[sp--];
-                    const ULONG alloc_protect = stack[sp--])
-                {
-                    PVOID result = vm_alloc(&alloc_size, alloc_type, alloc_protect);
-                    stack[++sp] = reinterpret_cast<int64_t>(result);
-                }
+                const ULONG alloc_type = stack[sp--];
+                const ULONG alloc_protect = stack[sp--];
+                stack[++sp] = reinterpret_cast<int64_t>(vm_alloc(&alloc_size, alloc_type, alloc_protect));
+            }
             break;
             // the same as VM_ALLOC, but pushes if the free was successful or not
             case VM_FREE:
-                static auto free_ba = stack[sp--];
+            {
+                auto free_ba = stack[sp--];
                 SIZE_T free_size = stack[sp--];
-                if (const ULONG free_type = stack[sp--];
-                    vm_free(reinterpret_cast<PVOID>(free_ba), &free_size, free_type) == STATUS_SUCCESS)
-                {
+                const ULONG free_type = stack[sp--];
+                if (vm_free(reinterpret_cast<PVOID>(free_ba), &free_size, free_type) == STATUS_SUCCESS) {
                     stack[++sp] = 0;
-                    break;
+                } else {
+                    stack[++sp] = 1;
                 }
-                stack[++sp] = 1;
+            }
             break;
             case VM_HALT:
                 return;

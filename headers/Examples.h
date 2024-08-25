@@ -7,6 +7,7 @@
 
 #include "../headers/common.h"
 #include "../headers/Bytecode.h"
+#include "../headers/nt/params.h"
 
 namespace Examples {
 
@@ -107,6 +108,16 @@ namespace Examples {
         VM_CONST, 9,
         VM_PRINT,
         VM_MODULE_BASE,
+        VM_PRINT,
+        VM_HALT
+    };
+
+    constexpr int ALLOC_ENTRYPOINT = 0;
+    inline std::vector<int32_t> alloc = {
+        VM_CONST, 0x1000,
+        VM_CONST, static_cast<int32_t>(NtAllocateVirtualMemory_params::AllocationType::Commit),
+        VM_CONST, static_cast<int32_t>(NtAllocateVirtualMemory_params::Protection::Read_Write),
+        VM_ALLOC,
         VM_PRINT,
         VM_HALT
     };

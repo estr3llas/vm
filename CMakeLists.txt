@@ -7,7 +7,7 @@ add_executable(simple_vm src/main.cpp
         headers/Bytecode.h
         headers/common.h
         headers/Examples.h
-        headers/exception_handler.h
+        headers/exceptions.h
         headers/vm.h
         src/exception.cpp
         src/vm.cpp

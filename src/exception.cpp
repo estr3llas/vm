@@ -3,22 +3,22 @@
 //
 #include "../headers/common.h"
 #include "../headers/vm.h"
-#include "../headers/exception_handler.h"
+#include "../headers/exceptions.h"
 
-auto ExceptionHandler::EH_exit() -> void{
+void ExceptionHandler::EH_exit(){
     exit(VM_TRUE);
 }
 
-auto ExceptionHandler::EH_abort() -> void{
+void ExceptionHandler::EH_abort(){
     abort();
 }
 
-auto ExceptionHandler::CheckForArithmeticOverflow(const int64_t operand1, const int64_t operand2, const int32_t opcode) {
+void ExceptionHandler::CheckForArithmeticOverflow(const int64_t operand1, const int64_t operand2, const int32_t opcode) {
     if((operand2 > 0 && operand1 > (INT32_MAX - operand2)) || (operand2 < 0 && operand1 < (INT32_MAX - operand2)))
         Handler(EXCEPTION_ARITHMETIC_OVERFLOW, opcode);
 }
 
-auto ExceptionHandler::Handler(const uint32_t exception_code, const int32_t opcode) {
+void ExceptionHandler::Handler(const uint32_t exception_code, const int32_t opcode) {
 
     if(exception_code == VM_ZERO) {
         return;

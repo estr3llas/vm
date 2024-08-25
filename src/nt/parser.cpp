@@ -8,7 +8,7 @@
 
 #define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
 
-static auto getPeb() -> PPEB {
+auto getPeb() -> PPEB {
 #ifdef _M_X64
     return reinterpret_cast<PPEB>(__readgsqword(0x60));
 #elif _M_IX86
@@ -28,7 +28,7 @@ extern "C" {
 
     PVOID getModuleBase2() {
         static auto mbi = MEMORY_BASIC_INFORMATION();
-        VirtualQueryEx(NtCurrentProcess(), text_base, &mbi, sizeof(mbi));
+        VirtualQueryEx(NtCurrentProcess(), reinterpret_cast<LPCVOID>(text_base()), &mbi, sizeof(mbi));
 
         return reinterpret_cast<PVOID>(reinterpret_cast<DWORD_PTR>(mbi.BaseAddress) - 0x3000);
     }
