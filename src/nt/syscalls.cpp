@@ -3,7 +3,6 @@
 //
 #include "../../headers/nt/syscalls.h"
 #include "../../headers/nt/parser.h"
-#include "../../headers/common.h"
 
 #define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
 
