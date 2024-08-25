@@ -260,6 +260,7 @@ void VM::Cpu() {
                     stack[++sp] = reinterpret_cast<int64_t>(result);
                 }
             break;
+            // the same as VM_ALLOC, but pushes if the free was successful or not
             case VM_FREE:
                 static auto free_ba = stack[sp--];
                 SIZE_T free_size = stack[sp--];
@@ -270,7 +271,6 @@ void VM::Cpu() {
                     break;
                 }
                 stack[++sp] = 1;
-            break;
             break;
             case VM_HALT:
                 return;
