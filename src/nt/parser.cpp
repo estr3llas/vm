@@ -17,7 +17,7 @@ static auto getPeb() -> PPEB {
 }
 
 auto getModuleBase() -> PVOID {
-    const auto peb = getPeb();
+    const static auto peb = getPeb();
     return peb->ImageBase;
 }
 
@@ -35,20 +35,20 @@ extern "C" {
 }
 
 auto getNTDLL(PPEB peb) {
-    PPEB_LDR_DATA ldr_data = peb->LoaderData;
+    const static auto ldr_data = peb->LoaderData;
     const auto& [flink, blink] = ldr_data->InLoadOrderModuleList;
 
     // NASTY !
-    const auto ntdll = reinterpret_cast<PLDR_DATA_TABLE_ENTRY>(flink->Flink->Flink);
+    const static auto ntdll = reinterpret_cast<PLDR_DATA_TABLE_ENTRY>(flink->Flink->Flink);
 
     return ntdll->DllBase;
 }
 
 auto getNTDLLExportTable(DWORD_PTR ntdll) {
-    const auto dos = reinterpret_cast<PIMAGE_DOS_HEADER>(ntdll);
-    const auto nt = reinterpret_cast<PIMAGE_NT_HEADERS>(ntdll + dos->e_lfanew);
+    const static auto dos = reinterpret_cast<PIMAGE_DOS_HEADER>(ntdll);
+    const static auto nt = reinterpret_cast<PIMAGE_NT_HEADERS>(ntdll + dos->e_lfanew);
 
-    const auto opt = &(nt->OptionalHeader);
+    const static auto opt = &(nt->OptionalHeader);
     return reinterpret_cast<PIMAGE_EXPORT_DIRECTORY>(ntdll + opt->DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
 }
 

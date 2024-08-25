@@ -71,7 +71,7 @@ void VM::Disassemble(const int32_t opcode) const {
     const Instruction instr = Instructions::opcodes[opcode];
     printf("%04d: %-16s", ip, instr.getMnemonic());
 
-    bool noops = false;
+    static bool noops = false;
     //print operands
     switch (instr.getOperand()) {
         case 1:
@@ -123,10 +123,10 @@ void VM::Cpu() {
         _exception_handler.Handler(ExceptionHandler::EXCEPTION_IP_OVERFLOW, 0);
     }
 
-    int32_t operand, addr, offset;
-    int64_t a, b, operand_64;
-    int32_t first_arg;
-    int32_t nargs;
+    static int32_t operand, addr, offset;
+    static int64_t a, b, operand_64;
+    static int32_t first_arg;
+    static int32_t nargs;
 
     std::vector<Context> call_stack;
 

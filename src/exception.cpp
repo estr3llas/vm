@@ -24,7 +24,7 @@ auto ExceptionHandler::Handler(const uint32_t exception_code, const int32_t opco
         return;
     }
 
-    const std::string &filename = GetBcFilename();
+    const static std::string &filename = GetBcFilename();
 
     switch(exception_code){
         case EXCEPTION_DIVIDE_BY_ZERO:
