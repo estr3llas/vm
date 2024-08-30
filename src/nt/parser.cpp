@@ -1,16 +1,18 @@
 //
 // Created by User on 7/21/2024.
 //
+#include <winternl.h>
+
 #include "../../headers/common.h"
 #include "../../headers/nt/peb.h"
-
-#include "windows.h"
+#include "../../headers/nt/nt.h"
+#include "../../headers/nt/syscalls.h"
 
 #define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
 
-auto getPeb() -> PPEB {
+auto getPeb() -> peb::PPEB {
 #ifdef _M_X64
-    return reinterpret_cast<PPEB>(__readgsqword(0x60));
+    return reinterpret_cast<peb::PPEB>(__readgsqword(0x60));
 #elif _M_IX86
     return reinterpret_cast<PPEB>(__readfsdword(0x30));
 #endif
@@ -34,12 +36,12 @@ extern "C" {
     }
 }
 
-auto getNTDLL(PPEB peb) {
+auto getNTDLL(peb::PPEB peb) {
     const static auto ldr_data = peb->LoaderData;
     const auto& [flink, blink] = ldr_data->InLoadOrderModuleList;
 
     // NASTY !
-    const static auto ntdll = reinterpret_cast<PLDR_DATA_TABLE_ENTRY>(flink->Flink->Flink);
+    const static auto ntdll = reinterpret_cast<peb::PLDR_DATA_TABLE_ENTRY>(flink->Flink->Flink);
 
     return ntdll->DllBase;
 }

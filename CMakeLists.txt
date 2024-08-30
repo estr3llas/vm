@@ -12,10 +12,10 @@ add_executable(simple_vm src/main.cpp
         src/exception.cpp
         src/vm.cpp
         src/nt/parser.cpp
-        headers/nt/peb.h
         headers/nt/parser.h
         headers/nt/syscalls.h
         headers/misc/usage.h
         src/nt/syscalls.cpp
         headers/nt/params.h
+        headers/nt/peb.h
 )

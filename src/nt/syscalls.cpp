@@ -12,8 +12,9 @@ auto vm_alloc(PSIZE_T sz, const ULONG type, const ULONG protect) -> PVOID {
     PVOID ba;
 
     const static auto ntdll = getNTDLL(getPeb());
-    const static auto pNtAllocateVirtualMemory = reinterpret_cast<Syscall::NtAllocateVirtualMemory>(
-        GetProcAddress(static_cast<HMODULE>(ntdll), "NtAllocateVirtualMemory")
+    const static auto pNtAllocateVirtualMemory = reinterpret_cast<
+        Syscall::NtAllocateVirtualMemory > (
+            GetProcAddress(static_cast<HMODULE>(ntdll), "NtAllocateVirtualMemory")
         );
 
     if(pNtAllocateVirtualMemory(NtCurrentProcess(), &ba, 0, sz, type, protect) == STATUS_SUCCESS)
@@ -25,8 +26,9 @@ auto vm_alloc(PSIZE_T sz, const ULONG type, const ULONG protect) -> PVOID {
 auto vm_free(PVOID ba, PSIZE_T sz, const ULONG type) -> NTSTATUS {
 
     const static auto ntdll = getNTDLL(getPeb());
-    const static auto pNtFreeVirtualMemory = reinterpret_cast<Syscall::NtFreeVirtualMemory>(
-        GetProcAddress(static_cast<HMODULE>(ntdll), "NtFreeVirtualMemory")
+    const static auto pNtFreeVirtualMemory = reinterpret_cast<
+        Syscall::NtFreeVirtualMemory > (
+            GetProcAddress(static_cast<HMODULE>(ntdll), "NtFreeVirtualMemory")
         );
 
     return pNtFreeVirtualMemory(NtCurrentProcess(), &ba, sz, type);

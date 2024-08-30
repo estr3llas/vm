@@ -1,21 +1,9 @@
 # ninja log v6
-5	1329	7463311647506427	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
-9	635	7463169199134520	CMakeFiles/simple_vm.dir/src/exception.cpp.obj	4bf2353c9021c34c
-5	986	7463175652327358	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
-1090	1172	7463178298424268	simple_vm.exe	1b4640b8c5fabf6f
-10	1091	7438191665185799	CMakeFiles/simple_vm.dir/src/parser.cpp.obj	5f2eb360f93bbfd6
-4	423	7463312501046032	build.ninja	619c2bee97bc37b5
-5	1090	7463178287567235	CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj	d57fa776b56e2801
-13	1136	7463311647586445	CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj	90b8f090aed21a35
-2	220	7463312501046032	build.ninja	619c2bee97bc37b5
-4	377	7463312501281019	CMakeFiles/simple_vm.dir/src/exception.cpp.obj	4bf2353c9021c34c
-8	1111	7463312846576923	CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj	d57fa776b56e2801
-5	1135	7463313408854456	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
-5	1278	7463317663244837	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
-10	807	7463318141042948	CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj	90b8f090aed21a35
-8	1082	7463318141022944	CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj	d57fa776b56e2801
-5	1289	7463318140992970	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
-1289	1372	7463318153837895	simple_vm.exe	3356fcbb07aad9d8
 5	1108	7463321428626471	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
+4	377	7463312501281019	CMakeFiles/simple_vm.dir/src/exception.cpp.obj	4bf2353c9021c34c
 8	1287	7463321428656470	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
 1287	1368	7463321441438748	simple_vm.exe	3356fcbb07aad9d8
+10	1091	7438191665185799	CMakeFiles/simple_vm.dir/src/parser.cpp.obj	5f2eb360f93bbfd6
+2	220	7466841471282031	build.ninja	619c2bee97bc37b5
+8	1082	7463318141022944	CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj	d57fa776b56e2801
+10	807	7463318141042948	CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj	90b8f090aed21a35
