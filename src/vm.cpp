@@ -120,7 +120,7 @@ void VM::Cpu() {
     ExceptionHandler _exception_handler;
 
     if (ip > code.size()) {
-        _exception_handler.Handler(ExceptionHandler::EXCEPTION_IP_OVERFLOW, 0);
+        _exception_handler.Handler(ExceptionHandler::exception_codes::EXCEPTION_IP_OVERFLOW, 0);
     }
 
     int32_t operand, addr, offset;
@@ -219,7 +219,7 @@ void VM::Cpu() {
                 b = stack[sp--];
                 a = stack[sp--];
                 if(b == 0) {
-                    _exception_handler.Handler(ExceptionHandler::EXCEPTION_DIVIDE_BY_ZERO, opcode);
+                    _exception_handler.Handler(ExceptionHandler::exception_codes::EXCEPTION_DIVIDE_BY_ZERO, opcode);
                 }
                 stack[++sp] = a / b;
             break;
@@ -286,7 +286,7 @@ void VM::Cpu() {
                 // which makes the jump table unbounded.
                 // Still thinking if it is worth it.
 
-                _exception_handler.Handler(ExceptionHandler::EXCEPTION_UNKNOWN_OPCODE, opcode);
+                _exception_handler.Handler(ExceptionHandler::exception_codes::EXCEPTION_UNKNOWN_OPCODE, opcode);
                 return;
         }
     }
