@@ -275,6 +275,17 @@ void VM::Cpu() {
             case VM_HALT:
                 return;
             default:
+                //__builtin_unreachable();
+                //
+                // By applying "__builtin_unreachable()", clang would remove the following:
+                //
+                //      lea     ecx, [rbx-1]    ; switch 27 cases
+                //      cmp     ecx, 1Ah
+                //      ja      def_1400029EB   ; jumptable 00000001400029EB default case, cases 13,24
+                //
+                // which makes the jump table unbounded.
+                // Still thinking if it is worth it.
+
                 _exception_handler.Handler(ExceptionHandler::EXCEPTION_UNKNOWN_OPCODE, opcode);
                 return;
         }

@@ -4,6 +4,11 @@
 8	1287	7463321428656470	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
 1287	1368	7463321441438748	simple_vm.exe	3356fcbb07aad9d8
 10	1091	7438191665185799	CMakeFiles/simple_vm.dir/src/parser.cpp.obj	5f2eb360f93bbfd6
-2	220	7466841471282031	build.ninja	619c2bee97bc37b5
+2	220	7468483562607671	build.ninja	619c2bee97bc37b5
 8	1082	7463318141022944	CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj	d57fa776b56e2801
 10	807	7463318141042948	CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj	90b8f090aed21a35
+12	1104	7468485387117924	CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj	d57fa776b56e2801
+6	1253	7468485387057917	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
+8	764	7468485695113372	CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj	90b8f090aed21a35
+5	1331	7468486627011604	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
+1331	1516	7468486640271285	simple_vm.exe	3356fcbb07aad9d8

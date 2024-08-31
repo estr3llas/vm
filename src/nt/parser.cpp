@@ -3,9 +3,7 @@
 //
 #include <winternl.h>
 
-#include "../../headers/common.h"
 #include "../../headers/nt/peb.h"
-#include "../../headers/nt/nt.h"
 #include "../../headers/nt/syscalls.h"
 
 #define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
