@@ -275,7 +275,7 @@ void VM::Cpu() {
             case VM_HALT:
                 return;
             default:
-                //__builtin_unreachable();
+                __builtin_unreachable();
                 //
                 // By applying "__builtin_unreachable()", clang would remove the following:
                 //
