@@ -277,7 +277,7 @@ void VM::Cpu() {
             default:
                 __builtin_unreachable();
                 //
-                // By applying "__builtin_unreachable()", clang would remove the following:
+                // By applying "__builtin_unreachable()", clang++ would remove the following:
                 //
                 //      lea     ecx, [rbx-1]    ; switch 27 cases
                 //      cmp     ecx, 1Ah
@@ -286,8 +286,10 @@ void VM::Cpu() {
                 // which makes the jump table unbounded.
                 // Still thinking if it is worth it.
 
-                _exception_handler.Handler(ExceptionHandler::exception_codes::EXCEPTION_UNKNOWN_OPCODE, opcode);
-                return;
+                // substitute for __builtin_unreachable();
+                //
+                //_exception_handler.Handler(ExceptionHandler::exception_codes::EXCEPTION_UNKNOWN_OPCODE, opcode);
+                //return;
         }
     }
 }
