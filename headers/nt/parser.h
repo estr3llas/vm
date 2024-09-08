@@ -7,6 +7,8 @@
 
 #include "peb.h"
 
+#define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
+
 peb::PPEB getPeb();
 PVOID getModuleBase();
 extern "C" {

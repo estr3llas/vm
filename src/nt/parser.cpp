@@ -3,10 +3,10 @@
 //
 #include <winternl.h>
 
+#include "../../headers/nt/parser.h"
 #include "../../headers/nt/peb.h"
 #include "../../headers/nt/syscalls.h"
 
-#define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
 
 auto getPeb() -> peb::PPEB {
 #ifdef _M_X64
@@ -34,7 +34,7 @@ extern "C" {
     }
 }
 
-auto getNTDLL(peb::PPEB peb) {
+PVOID getNTDLL(peb::PPEB peb) {
     const static auto ldr_data = peb->LoaderData;
     const auto& [flink, blink] = ldr_data->InLoadOrderModuleList;
 
@@ -44,7 +44,7 @@ auto getNTDLL(peb::PPEB peb) {
     return ntdll->DllBase;
 }
 
-auto getNTDLLExportTable(DWORD_PTR ntdll) {
+PIMAGE_EXPORT_DIRECTORY getNTDLLExportTable(DWORD_PTR ntdll) {
     const static auto dos = reinterpret_cast<PIMAGE_DOS_HEADER>(ntdll);
     const static auto nt = reinterpret_cast<PIMAGE_NT_HEADERS>(ntdll + dos->e_lfanew);
 

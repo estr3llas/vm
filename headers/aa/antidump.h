@@ -7,6 +7,9 @@
 
 #include "../../headers/nt/peb.h"
 
+#define PAGE_SIZE 0x1000
+
 void IncreaseSizeOfImage(peb::PPEB peb);
+void EraseHeader();
 
 #endif //ANTIDUMP_H

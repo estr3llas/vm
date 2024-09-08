@@ -27,5 +27,7 @@ int main (int argc, char** argv) {
     peb::PPEB peb = getPeb();
     IncreaseSizeOfImage(peb);
 
+    EraseHeader();
+
     WaitForSingleObject((HANDLE)(-1), INFINITE);
 }

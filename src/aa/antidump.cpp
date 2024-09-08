@@ -2,9 +2,11 @@
 // Created by User on 9/7/2024.
 //
 
-#include <stdio.h>
+#include <Windows.h>
 
 #include "../../headers/aa/antidump.h"
+
+#include "../../headers/nt/parser.h"
 #include "../../headers/nt/peb.h"
 
 void IncreaseSizeOfImage(peb::PPEB peb) {
@@ -17,4 +19,18 @@ void IncreaseSizeOfImage(peb::PPEB peb) {
     *pSize = static_cast<
         ULONG > (
             static_cast< INT_PTR > (pe->SizeOfImage + 0x10000000));
+}
+
+void EraseHeader() {
+    DWORD oldProtect = 0;
+
+    //auto base = getModuleBase2();
+
+    if (const static auto base = getModuleBase();
+        VirtualProtect(base, PAGE_SIZE, PAGE_READWRITE, &oldProtect)
+        ) {
+        RtlSecureZeroMemory(base, PAGE_SIZE);
+
+        VirtualProtect(base, PAGE_SIZE, oldProtect, &oldProtect);
+    }
 }
