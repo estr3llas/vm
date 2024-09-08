@@ -79,6 +79,12 @@ build CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj: CXX_COMPILER__simple_vm_
   OBJECT_DIR = CMakeFiles\simple_vm.dir
   OBJECT_FILE_DIR = CMakeFiles\simple_vm.dir\src\nt
 
+build CMakeFiles/simple_vm.dir/src/aa/antidump.cpp.obj: CXX_COMPILER__simple_vm_unscanned_Release C$:/Users/User/CLionProjects/simple_vm/src/aa/antidump.cpp || cmake_object_order_depends_target_simple_vm
+  DEP_FILE = CMakeFiles\simple_vm.dir\src\aa\antidump.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -fansi-escape-codes -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles\simple_vm.dir
+  OBJECT_FILE_DIR = CMakeFiles\simple_vm.dir\src\aa
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target simple_vm
@@ -87,7 +93,7 @@ build CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj: CXX_COMPILER__simple_vm_
 #############################################
 # Link the executable simple_vm.exe
 
-build simple_vm.exe: CXX_EXECUTABLE_LINKER__simple_vm_Release CMakeFiles/simple_vm.dir/src/main.cpp.obj CMakeFiles/simple_vm.dir/src/exception.cpp.obj CMakeFiles/simple_vm.dir/src/vm.cpp.obj CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj
+build simple_vm.exe: CXX_EXECUTABLE_LINKER__simple_vm_Release CMakeFiles/simple_vm.dir/src/main.cpp.obj CMakeFiles/simple_vm.dir/src/exception.cpp.obj CMakeFiles/simple_vm.dir/src/vm.cpp.obj CMakeFiles/simple_vm.dir/src/nt/parser.cpp.obj CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj CMakeFiles/simple_vm.dir/src/aa/antidump.cpp.obj
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\simple_vm.dir

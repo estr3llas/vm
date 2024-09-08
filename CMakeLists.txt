@@ -18,4 +18,6 @@ add_executable(simple_vm src/main.cpp
         src/nt/syscalls.cpp
         headers/nt/params.h
         headers/nt/peb.h
+        src/aa/antidump.cpp
+        headers/aa/antidump.h
 )
