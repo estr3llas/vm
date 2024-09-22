@@ -16,7 +16,12 @@ VM::VM() :
     ctx(Context(nullptr, 0, LOCALS_MAX_SIZE))
     {};
 
-VM::VM(const std::vector<int>& bytecode, const int32_t entrypoint, const size_t datasize) :
+VM::VM(
+    const std::vector<int>& bytecode,
+    const int32_t entrypoint,
+    const size_t datasize
+    )
+:
     code(bytecode),
     ip(entrypoint),
     data(
@@ -30,12 +35,18 @@ VM::VM(const std::vector<int>& bytecode, const int32_t entrypoint, const size_t 
     ctx(Context(nullptr, 0, LOCALS_MAX_SIZE))
     {};
 
-void VM::SetTrace(const bool value) {
+void VM::SetTrace(
+    const bool value
+    )
+{
     trace = value;
 }
 
 template<typename T>
-void VM::VMPrint(T arg){
+void VM::VMPrint(
+    T arg
+    )
+{
 
     if(typeid(arg) == typeid(PVOID)) {
         vm_print_ok("%p\n", arg);
@@ -54,7 +65,10 @@ uint32_t VM::get_ip() const {
     return ip;
 }
 
-void VM::SetBcFilename(const std::string &filename) {
+void VM::SetBcFilename(
+    const std::string &filename
+    )
+{
     filename.empty()
     ? bc_filename = nullptr
     : bc_filename = filename;
@@ -64,7 +78,9 @@ const std::string& VM::GetBcFilename() {
     return bc_filename;
 }
 
-void VM::Disassemble(const int32_t opcode) const {
+void VM::Disassemble(
+    const int32_t opcode
+    ) const {
 
     if (ip >= code.size()) return;
 

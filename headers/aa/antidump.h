@@ -9,7 +9,15 @@
 
 #define PAGE_SIZE 0x1000
 
-void IncreaseSizeOfImage(peb::PPEB peb);
-void EraseHeader();
+namespace Antidump {
+    void IncreaseSizeOfImage(peb::PPEB peb);
+    void EraseHeader();
+}
+
+inline void EnableAntidump() {
+    peb::PPEB peb = getPeb();
+    Antidump::IncreaseSizeOfImage(peb);
+    Antidump::EraseHeader();
+}
 
 #endif //ANTIDUMP_H

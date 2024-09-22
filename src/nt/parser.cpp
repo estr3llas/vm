@@ -34,7 +34,7 @@ extern "C" {
     }
 }
 
-PVOID getNTDLL(peb::PPEB peb) {
+PVOID getNTDLL( peb::PPEB peb ) {
     const static auto ldr_data = peb->LoaderData;
     const auto& [flink, blink] = ldr_data->InLoadOrderModuleList;
 
@@ -44,7 +44,7 @@ PVOID getNTDLL(peb::PPEB peb) {
     return ntdll->DllBase;
 }
 
-PIMAGE_EXPORT_DIRECTORY getNTDLLExportTable(DWORD_PTR ntdll) {
+PIMAGE_EXPORT_DIRECTORY getNTDLLExportTable( DWORD_PTR ntdll ) {
     const static auto dos = reinterpret_cast<PIMAGE_DOS_HEADER>(ntdll);
     const static auto nt = reinterpret_cast<PIMAGE_NT_HEADERS>(ntdll + dos->e_lfanew);
 

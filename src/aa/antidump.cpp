@@ -4,13 +4,16 @@
 
 #include <Windows.h>
 
+
 #include "../../headers/aa/antidump.h"
 
 #include "../../headers/nt/parser.h"
 #include "../../headers/nt/peb.h"
 
 namespace Antidump {
-    void IncreaseSizeOfImage(peb::PPEB peb) {
+    void IncreaseSizeOfImage(
+        peb::PPEB peb
+        ) {
         const static auto ldr_data = peb->LoaderData;
         const auto& [flink, blink] = ldr_data->InLoadOrderModuleList;
         const static auto pe = reinterpret_cast<peb::PLDR_DATA_TABLE_ENTRY>(flink->Flink);

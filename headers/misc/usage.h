@@ -5,7 +5,7 @@
 #ifndef USAGE_H
 #define USAGE_H
 
-#define VM_VERSION "0.0.1"
+#define VM_VERSION "0.0.3"
 
 #define USAGE   " Estrellas's simple vm.\n"                           \
                 " Version: %s\n\n"                                    \
