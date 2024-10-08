@@ -31,8 +31,7 @@ namespace Antidump {
         //auto base = getModuleBase2();
 
         if (const static auto base = getModuleBase();
-            VirtualProtect(base, PAGE_SIZE, PAGE_READWRITE, &oldProtect)
-            ) {
+            VirtualProtect(base, PAGE_SIZE, PAGE_READWRITE, &oldProtect)) {
             RtlSecureZeroMemory(base, PAGE_SIZE);
 
             VirtualProtect(base, PAGE_SIZE, oldProtect, &oldProtect);

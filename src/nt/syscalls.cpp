@@ -8,13 +8,10 @@
 
 #pragma comment(lib, "ntdll")
 
-PVOID vm_alloc(
-    PSIZE_T sz,
-    const ULONG type,
-    const ULONG protect
-    ) {
-    PVOID ba;
+PVOID vm_alloc( PSIZE_T sz, const ULONG type, const ULONG protect) {
 
+    PVOID ba;
+    
     const static auto ntdll = getNTDLL(getPeb());
     const static auto pNtAllocateVirtualMemory = reinterpret_cast<
         Syscall::NtAllocateVirtualMemory > (
@@ -27,11 +24,8 @@ PVOID vm_alloc(
     return nullptr;
 }
 
-NTSTATUS vm_free(
-    PVOID ba,
-    PSIZE_T sz,
-    const ULONG
-    ) {
+NTSTATUS vm_free(PVOID ba, PSIZE_T sz, const ULONG type) {
+
     const static auto ntdll = getNTDLL(getPeb());
     const static auto pNtFreeVirtualMemory = reinterpret_cast<
         Syscall::NtFreeVirtualMemory > (

@@ -20,4 +20,5 @@ add_executable(simple_vm src/main.cpp
         headers/nt/peb.h
         src/aa/antidump.cpp
         headers/aa/antidump.h
+        headers/misc/log.h
 )

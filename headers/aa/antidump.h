@@ -6,6 +6,7 @@
 #define ANTIDUMP_H
 
 #include "../../headers/nt/peb.h"
+#include "../../headers/nt/parser.h"
 
 #define PAGE_SIZE 0x1000
 
