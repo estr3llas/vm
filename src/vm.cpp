@@ -43,21 +43,22 @@ void VM::SetTrace(
 }
 
 template<typename T>
-void VM::VMPrint(
-    T arg
-    )
-{
+void VM::VMPrint(T arg) {
+    vm_print_ok("No compatible Argument to %s!!\n", __func__);
+}
 
-    if(typeid(arg) == typeid(PVOID)) {
-        vm_print_ok("%p\n", arg);
-        return;
-    }
+template<>
+void VM::VMPrint<PVOID>(PVOID arg) {
+    vm_print_ok("%p\n", arg);
+}
 
-    if(typeid(arg) == typeid(int64_t)) {
-        vm_print_ok("%llx\n", arg);
-        return;
-    }
+template<>
+void VM::VMPrint<int64_t>(int64_t arg) {
+    vm_print_ok("%llx\n", arg);
+}
 
+template<>
+void VM::VMPrint<int32_t>(int32_t arg) {
     vm_print_ok("%d\n", arg);
 }
 

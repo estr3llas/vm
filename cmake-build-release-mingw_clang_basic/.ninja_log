@@ -15,3 +15,7 @@
 6	1206	7500549299617501	CMakeFiles/simple_vm.dir/src/main.cpp.obj	cd736a0231e384c9
 5	800	7500550370685784	CMakeFiles/simple_vm.dir/src/nt/syscalls.cpp.obj	90b8f090aed21a35
 800	981	7500550378631847	simple_vm.exe	81fc8d6fda0b7c9
+14	1734	7504828631474472	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
+1734	1926	7504828648668606	simple_vm.exe	81fc8d6fda0b7c9
+6	1328	7504829088584341	CMakeFiles/simple_vm.dir/src/vm.cpp.obj	37029dd5d171b38b
+1329	1422	7504829101807358	simple_vm.exe	81fc8d6fda0b7c9
