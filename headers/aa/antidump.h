@@ -12,7 +12,7 @@
 
 namespace Antidump {
     void IncreaseSizeOfImage(peb::PPEB peb);
-    void EraseHeader();
+    NTSTATUS EraseHeader();
 }
 
 inline void EnableAntidump() {
