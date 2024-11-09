@@ -6,4 +6,4 @@ Version: `0.0.2`
 
 # TODO
 
-finish syscalls
+call dispatcher
